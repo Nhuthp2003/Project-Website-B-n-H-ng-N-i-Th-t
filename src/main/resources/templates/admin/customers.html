@@ -1,0 +1,196 @@
+							<div class="container mt-3">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <h1 class="fw-bold" style="font-size: 32px;">Customers</h1>
+                                    </div>
+                                    <div class="col-2 text-end dropdown">
+                                        <a class="btn border-0" href="#" role="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <iconify-icon icon="prime:bell" style="font-size: 24px;"></iconify-icon>
+                                            <span
+                                                class="position-absolute top-0 translate-middle badge rounded-pill"
+                                                style="background-color: #1e372f;">
+                                                4
+                                                <span class="visually-hidden">unread messages</span>
+                                            </span>
+                                        </a>
+
+                                        <ul class="dropdown-menu border-0 dropdown-menu-end"
+                                            style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; font-size: 13px;">
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-1.jpg"
+                                                        class="img-fluid rounded-3" alt="..."
+                                                        style="width: 40px; height: 40px;">
+                                                    <span class="fw-bold ms-1" style="font-size: 13px;">
+                                                        New Order
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-truncate" href="#">
+                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-1.jpg"
+                                                        class="img-fluid rounded-3" alt="..."
+                                                        style="width: 40px; height: 40px;">
+                                                    <span class="fw-bold ms-1" style="font-size: 13px;">
+                                                        Payment Successful
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-truncate" href="#">
+                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-1.jpg"
+                                                        class="img-fluid rounded-3" alt="..."
+                                                        style="width: 40px; height: 40px;">
+                                                    <span class="fw-bold ms-1" style="font-size: 13px;">
+                                                        Shipping Update
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-truncate" href="#">
+                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-1.jpg"
+                                                        class="img-fluid rounded-3" alt="..."
+                                                        style="width: 40px; height: 40px;">
+                                                    <span class="fw-bold ms-1" style="font-size: 13px;">
+                                                        Customer Feedback
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <div class="text-center">
+                                                <a class="btn" href="#" role="button" style="font-size: 13px;">VIEW
+                                                    ALL</a>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <h1 class="mt-3" style="font-size: 13px;">
+                                <nav class="ms-2" aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a class="text-secondary" href="#">Dashboard</a></li>
+                                        <li class="breadcrumb-item active text-dark" aria-current="page">Customers</li>
+                                    </ol>
+                                </nav>
+                            </h1>
+                            <div class="col">
+                                <div class="row mt-3">
+						             <div class="col-md-6 col-lg-7">
+                                        <div class="row rounded-3">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control border-0 bg-light rounded-pill rounded-end shadow-none ms-1" placeholder="Search here..." aria-label="Search here..."
+                                                    aria-describedby="button-addon2">
+                                                <button th:action="@{/dashboard/customer}" method="get" class="btn bg-light border-0 rounded-pill rounded-start me-1"
+                                                    type="button" id="button-addon2">
+                                                    <iconify-icon class="mt-2" icon="prime:search"
+                                                        style="font-size: 24px;"></iconify-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   	<div class="col">
+                                        <div class="row rounded-3 ms-1 me-1 d-flex justify-content-end">
+                                            <a class="btn col-md-6 col-lg-5 rounded-3 text-white" href="#!/product" role="button"
+                                                aria-expanded="false"
+                                                style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+                                                <iconify-icon icon="prime:plus"
+                                                    style="font-size: 17px; position: relative; top: 3px;"></iconify-icon>
+                                                <h1 class="fw-bold mt-2"
+                                                    style="font-size: 13px; display: inline-block; margin-left: 5px;">
+                                                    Add Product</h1>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+   
+                        	<!--Lấy danh sách người dùng -->
+                            <div class="container mt-2">
+                                <div class="row">
+                                    <div class="col table-responsive">
+                                        <table class="table table-borderless">
+                                            <thead class="table-secondary" style="font-size: 13px;">
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">NAME</th>
+                                                    <th scope="col">EMAIL</th>
+                                                    <th scope="col">LOCATION</th>
+                                                    <th scope="col">PHONE</th>                                                 
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>		
+                                                <tr th:each="user : ${users}">
+                                                    <td>
+                                                    	<h1 class="mt-2" style="font-size: 17px" th:text="${user.userId}"></h1>
+                                                    </td>
+                                                    <td>
+                                                    	<h1 class="mt-2" style="font-size: 17px" th:text="${user.firstName}"></h1>
+                                                    </td>
+                                                    <td>
+                                                    	<h1 class="mt-2" style="font-size: 17px" th:text="${user.email}"></h1>
+                                                    </td>
+                                                    <td>
+                                                    	<h1 class="mt-2" style="font-size: 17px" th:text="${user.address}"></h1>
+                                                    </td>
+                                                    <td>
+                                                    	<h1 class="mt-2" style="font-size: 17px" th:text="${user.phone}"></h1>
+                                                    </td>
+                                                  <!-- Nút xóa và view detail-->
+                                                    <td>                
+                                                        <div class="dropdown">
+                                                            <a class="btn rounded-circle d-flex align-items-center justify-content-center"
+                                                                href="#" data-bs-toggle="dropdown" aria-expanded="false"
+                                                                style="width: 36px; height: 36px; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; position: relative; top: 1px;">
+                                                                <iconify-icon icon="prime:ellipsis-h"
+                                                                    style="font-size: 21px;"></iconify-icon>
+                                                            </a>
+                                                            
+                                                            <ul class="dropdown-menu border-0 dropdown-menu-end"
+                                                                style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">  
+                                                                <li>
+																	<form th:action="@{/dashboard/customer/{userId}(userId=${user.userId})}" method="get">
+                                                                     	<button class="dropdown-item" 
+                                                                     		style="font-size: 13px;">
+                                                                            <iconify-icon class="ms-1 me-2" icon="prime:eye" style="font-size: 16px; position: relative; top: 3px;">
+																			    </iconify-icon> View Details
+                                                                      	</button>                                                               
+														            </form>
+                                                                </li>
+                                                              	<li>
+																   	<form th:action="@{/dashboard/customers/delete/{userId}(userId=${user.userId})}" method="post">
+	                                                                     <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deletecustomer" style="font-size: 13px;">
+	                                                                             <iconify-icon class="ms-1 me-2" icon="prime:trash" style="font-size: 16px; position: relative; top: 3px;">
+																				     </iconify-icon> Delete
+	                                                                      </button>
+															       	</form>
+                                                             	</li>  
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 text-lg-start text-center">
+                                                <h1 class="mt-2 mb-3 ms-2" style="font-size: 13px;">Showing 10 Customers of 120</h1>
+                                            </div>
+                                            <div class="col text-lg-end text-center hvafc">
+                                                <a class="btn border border-light mb-5" href="#" role="button">
+                                                    <iconify-icon icon="teenyicons:left-outline"
+                                                        style="font-size: 12px;"></iconify-icon>
+                                                </a>
+                                                <a class="btn border border-light mb-5" href="#" role="button">1</a>
+                                                <a class="btn border border-light mb-5" href="#" role="button">2</a>
+                                                <a class="btn border border-light mb-5" href="#" role="button">3</a>
+                                                <a class="btn border border-light mb-5" href="#" role="button">
+                                                    <iconify-icon icon="teenyicons:right-outline"
+                                                        style="font-size: 12px;"></iconify-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>

@@ -1,0 +1,154 @@
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="container-fluid text-center">
+                <div class="row align-items-start">
+                    <div class="col text-start mt-1">
+                        <div class="row">
+                            <div class="col">
+                                <a class="navbar-toggler border-0 " type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas">
+                                    <iconify-icon icon="ph:text-align-left-thin" style="font-size: 24px; color: #1e372f;"></iconify-icon>
+                                </a>
+                                <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
+                                    aria-controls="offcanvasTop">
+                                    <iconify-icon icon="ph:magnifying-glass-thin" style="font-size: 24px; color: #1e372f;"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <a th:href="@{/}" class="navbar-brand fs-2"
+                            style="font-family: 'Playfair Display', serif; color: #1e372f;">ARPHOR</a>
+                    </div>
+                    <div class="col text-end mt-2">
+                        <div class="row">
+                            <div class="col">
+                            	<th:block th:unless="${#request.remoteUser}">
+									<a th:href="@{/account/login}" class="navbar-brand" href="#">
+	                                    <iconify-icon icon="ph:user-thin"
+	                                        style="font-size: 24px; color: #1e372f;"></iconify-icon>
+	                                </a>
+								</th:block>
+                                <th:block th:if="${#request.remoteUser}">
+									<span class="dropdown hvdb mt-2">
+			                            <a onclick="window.location.href='/profile'" class="navbar-brand" href="#">
+		                                    <iconify-icon icon="ph:user-thin"
+		                                        style="font-size: 24px; color: #1e372f;"></iconify-icon>
+		                                </a>
+			                            <ul class="dropdown-menu hvdbmn mt-2 border-0 rounded-0"
+			                                style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+			                                <li class="mt-2">
+							                    <a th:href="@{/profile}" class="dropdown-item fcmn">
+							                    	<h2 class=" mt-2"
+		                                            style="font-size: 13px; font-family: 'Montserrat', sans-serif;">My Account</h2>
+							                    </a>
+							                </li>
+							                <li th:if="${#request.isUserInRole('Admin')}">
+							                    <a th:href="@{/dashboard}" class="dropdown-item fcmn">
+							                    	<h2 class=" mt-2"
+		                                            style="font-size: 13px; font-family: 'Montserrat', sans-serif;">Dashboard</h2>
+							                    </a>
+							                </li>
+							                <li>
+							                    <a th:href="@{/account/logout}" class="dropdown-item fcmn">
+							                    	<h2 class=" mt-2"
+		                                            style="font-size: 13px; font-family: 'Montserrat', sans-serif;">Sign Out</h2>
+							                    </a>
+							                </li>
+			                            </ul>
+			                        </span>
+								</th:block>
+                                <a th:href="@{/cart/view}" class="navbar-brand position-relative" href="#">
+								    <iconify-icon icon="ph:bag-thin" style="font-size: 24px; color: #1e372f;"></iconify-icon>
+								    <span class="position-absolute top-1 start-100 translate-middle badge rounded-pill"
+								        ng-show="!cart.isEmptyCart"> <!-- Thêm điều kiện ng-show để ẩn khi giỏ hàng trống -->
+								        <h6 style="font-size: 14px; font-family: 'Montserrat', sans-serif; color: #1e372f;">
+								            {{ cart.count }}
+								        </h6>
+								    </span>
+								</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <hr class="text-secondary mt-0 mb-0">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarOffcanvas"
+                aria-labelledby="navbarOffcanvasLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="navbarOffcanvasLabel">
+                        <a class="navbar-brand fs-2" href="#" style="font-family: 'Playfair Display', serif;">ARPHOR</a>
+                    </h5>
+                    <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="offcanvas"
+                        aria-label="Close">
+                        <iconify-icon icon="ph:x-thin" style="font-size: 34px;"></iconify-icon>
+                    </button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown mt-1">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <div class="dropdown hvdd mt-2" th:each="parent : ${parents}">
+                            <a th:href="@{/product/list(parentName=${parent.parentName})}" class="nav-link hvdrop text-uppercase" href="#">
+                                <h2 class="me-3 ms-3" style="font-size: 13px; font-family: 'Montserrat', sans-serif; color: #1e372f;" th:text="${parent.parentName}">
+                                </h2>
+                            </a>
+                            <ul class="dropdown-menu hvddmn border-0 rounded-0"
+                                style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                <th:block th:each="category : ${categories}" th:if="${category.parent.parentId == parent.parentId}">
+						            <li class="mt-1">
+						                <a class="dropdown-item fcmn" th:href="@{/product/list(categoryId=${category.categoryID})}">
+						                    <h2 class=" mt-2" style="font-size: 13px; font-family: 'Montserrat', sans-serif;" th:text="${category.categoryName}">
+						                    </h2>
+						                </a>
+						            </li>
+						        </th:block>
+                            </ul>
+                        </div>
+                        
+			
+                        <script>
+                            document.querySelector('.dropdown > a').addEventListener('click', function (event) {
+                                event.preventDefault();
+                            });
+                        </script>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <hr class="text-secondary mt-0 mb-0">
+    <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <div class="container offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasTopLabel" style="font-family: 'Montserrat', sans-serif; color: #1e372f;">SEARCH
+            </h5>
+            <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="offcanvas" aria-label="Close">
+                <iconify-icon icon="ph:x-thin" style="font-size: 34px;"></iconify-icon>
+            </button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="container text-center">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <form th:action="@{/product/search}" class="nav-search">
+                        	<div class="input-group">
+								<input type="text" name="productName" id="name"
+									aria-describedby="helpId" class="form-control rounded-0 shadow-none"
+	                                placeholder="What are you looking for?" style="color: #1e372f;">
+	                            <button class="btn p-3 rounded-0 shadow-none" type="button"
+	                                style="background-color: #1e372f;">
+	                                <iconify-icon class="me-1 ms-1 text-white" icon="ph:magnifying-glass-thin"
+	                                    style="font-size: 24px;"></iconify-icon>
+	                            </button>
+							</div>
+						</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

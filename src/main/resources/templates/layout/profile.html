@@ -1,0 +1,759 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main>
+		<div class="container" style="font-family: 'Montserrat', sans-serif;">
+			<div class="row d-flex justify-content-center mt-5">
+				<div class="col-lg-5">
+					<div class="row">
+						<div class="col">
+							<img style="width: 160px; height: 160px;" th:src="@{|/image/home/${imageName}|}"
+								class="img-fluid rounded-circle" alt="...">
+						</div>
+						<div class="col-7">
+							<div class="card-body">
+								<h1 class="card-title fw-bold mt-2" style="font-size: 32px;">
+									<span th:text="${lastName}"></span> <span th:text="${firstName}"></span>
+								</h1>
+								<p class="card-text mt-3 text-secondary">[[${#request.remoteUser}]]</p>
+								<p th:text="${message}"></p>
+								<div class="d-flex justify-content-start mt-4">
+									<a class="btn btn-outline-dark btn-lg rounded-pill" href="#" role="button"
+										data-bs-toggle="modal" data-bs-target="#editprofile">
+										<h1 class="fw-bold mt-2 me-2 ms-2" style="font-size: 13px;">Edit Profile</h1>
+									</a>
+									<div class="dropdown">
+										<a class="btn btn-outline-dark rounded-circle d-flex align-items-center justify-content-center ms-3"
+											type="button" data-bs-toggle="dropdown" aria-expanded="false"
+											style="width: 50px; height: 50px;">
+											<iconify-icon icon="ph:dots-three-outline-thin"
+												style="font-size: 20px;"></iconify-icon>
+										</a>
+										<ul class="dropdown-menu border-0"
+											style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+											<li><button class="dropdown-item fcmn" data-bs-toggle="modal"
+													data-bs-target="#rewards">
+													<iconify-icon class="me-1" icon="ph:gift-thin"
+														style="font-size: 18px; position: relative; top: 4px;"></iconify-icon>
+													<span style="font-size: 13px;">Rewards</span>
+												</button>
+											</li>
+											<li><a th:href="@{/account/logout}" class="dropdown-item fcmn" href="#">
+													<iconify-icon class="me-1" icon="ph:sign-out-thin"
+														style="font-size: 18px; position: relative; top: 4px;"></iconify-icon>
+													<span style="font-size: 13px;">Log out</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+									<!-- Modal Rewards -->
+									<div class="modal fade" id="rewards" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="exampleModalLabel">Rewards</h1>
+													<button type="button" class="btn border-0 shadow-none"
+														data-bs-dismiss="modal" aria-label="Close">
+														<iconify-icon class="mt-2" icon="iconamoon:close-thin"
+															style="font-size: 34px;"></iconify-icon>
+													</button>
+												</div>
+												<div class="modal-body">
+													<form>
+														<div class="mb-3 mt-3">
+															<input id="number-container" type="text" ng-model="result"
+																class="form-control form-control-lg shadow-none bg-transparent"
+																disabled>
+														</div>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button id="start-button" ng-click="startRandomNumber()"
+														class="btn col-md-6 col-lg-4 rounded-3 text-white mb-3"
+														style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+														<h1 class="fw-bold mt-2" style="font-size: 13px;">Start
+														</h1>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Modal Edit Profile -->
+									<div class="modal fade" id="editprofile" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<form th:action="@{/profile/edit}" th:object="${userRoles}"
+													method="post" enctype="multipart/form-data">
+													<div class="container">
+														<div class="row">
+															<div class="col-lg-5 rounded-3"
+																style="background-color: #EFF0F2;">
+																<div class="container">
+																	<div class="row mt-5 mb-5">
+																		<div class="col text-center">
+																			<input type="file" name="image" id="file-input"
+																				style="display: none;">
+																			<label for="file-input" class="mb-4">
+																				<img id="preview-image"
+																					style="width: 160px; height: 160px;"
+																					th:src="@{|/image/home/${imageName}|}"
+																					class="img-fluid rounded-circle"
+																					alt="...">
+																			</label>
+																		</div>
+																	</div>
+																	<div class="mt-3 mb-3">
+																		<label for="current" class="form-label">Current
+																			Passowrd</label>
+																		<input type="password"
+																			class="form-control shadow-none border-0"
+																			id="current">
+																	</div>
+																	<div class="mb-3">
+																		<label for="new" class="form-label">New
+																			Passowrd</label>
+																		<input type="password"
+																			class="form-control shadow-none border-0"
+																			id="new">
+																	</div>
+																	<div class="mb-3">
+																		<label for="confirm" class="form-label">Confirm
+																			Passowrd</label>
+																		<input type="password"
+																			class="form-control shadow-none border-0"
+																			id="confirm">
+																	</div>
+																</div>
+															</div>
+															<div class="col">
+																<div class="d-flex justify-content-between">
+																	<h1 class="fw-bold mt-4 ms-3 mb-4"
+																		id="exampleModalLabel" style="font-size: 20px;">
+																		My Profile
+																	</h1>
+																	<button type="button"
+																		class="btn border-0 shadow-none"
+																		data-bs-dismiss="modal" aria-label="Close">
+																		<iconify-icon class="mt-2"
+																			icon="iconamoon:close-thin"
+																			style="font-size: 34px;"></iconify-icon>
+																	</button>
+																</div>
+																<div class="container">
+																	<div class="mb-3">
+																		<label for="firstname" class="form-label">First
+																			Name</label>
+																		<input th:field="*{firstName}" type="text"
+																			class="form-control shadow-none border-0"
+																			style="background-color: #EFF0F2;"
+																			id="firstname">
+																	</div>
+																	<div class="mb-3">
+																		<label for="lastname" class="form-label">Last
+																			Name</label>
+																		<input th:field="*{lastName}" type="text"
+																			class="form-control shadow-none border-0"
+																			style="background-color: #EFF0F2;"
+																			id="lastname">
+																	</div>
+																	<div class="mb-3">
+																		<label for="email"
+																			class="form-label">Email</label>
+																		<input type="email" th:field="*{email}"
+																			class="form-control shadow-none border-0"
+																			style="background-color: #EFF0F2;"
+																			id="email">
+																	</div>
+																	<div class="row">
+																		<div class="col">
+																			<div class="mb-3">
+																				<label for="phone"
+																					class="form-label">Phone</label>
+																				<input th:field="*{phone}" type="text"
+																					class="form-control shadow-none border-0"
+																					style="background-color: #EFF0F2;"
+																					id="phone">
+																			</div>
+																		</div>
+																		<div class="col">
+																			<div class="mb-3">
+																				<label for="genderInput"
+																					class="form-label">Gender</label>
+																				<select
+																					class="form-select shadow-none border-0"
+																					id="genderInput"
+																					th:field="*{gender}"
+																					aria-label="Default select example"
+																					style="background-color: #EFF0F2;">
+																					<option value="true">Female</option>
+																					<option value="false">Male</option>
+																				</select>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="mb-3">
+																		<label for="address"
+																			class="form-label">Address</label>
+																		<textarea th:field="*{address}"
+																			class="form-control shadow-none mb-3 border-0"
+																			id="address"
+																			style="background-color: #EFF0F2; height: 184px;"></textarea>
+																	</div>
+																	<div class="text-end">
+																		<button
+																			class="btn col-md-6 col-lg-4 rounded-3 text-white mb-3"
+																			style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+																			<h1 class="fw-bold mt-2"
+																				style="font-size: 13px;">Save
+																			</h1>
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-5">
+				<div class="col">
+					<div class="container">
+						<ul class="nav nav-pills" id="myTab" role="tablist">
+							<li class="nav-item ms-1 me-1 mt-1 mb-1" role="presentation">
+								<button class="nav-link active rounded-pill fw-bold" id="profile-tab"
+									data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab"
+									aria-controls="profile-tab-pane" aria-selected="true">Profile</button>
+							</li>
+							<li class="nav-item ms-1 mt-1 mb-1" role="presentation">
+								<button class="nav-link rounded-pill fw-bold" id="history-tab" data-bs-toggle="tab"
+									data-bs-target="#history-tab-pane" type="button" role="tab"
+									aria-controls="history-tab-pane" aria-selected="false">Order History</button>
+							</li>
+							<li class="nav-item ms-1 mt-1 mb-1" role="presentation">
+								<button class="nav-link rounded-pill fw-bold" id="wishlist-tab" data-bs-toggle="tab"
+									data-bs-target="#wishlist-tab-pane" type="button" role="tab"
+									aria-controls="wishlist-tab-pane" aria-selected="false">Wishlist</button>
+							</li>
+							<li class="nav-item ms-1 mt-1 mb-1" role="presentation">
+								<button class="nav-link rounded-pill fw-bold" id="payment-tab" data-bs-toggle="tab"
+									data-bs-target="#payment-tab-pane" type="button" role="tab"
+									aria-controls="payment-tab-pane" aria-selected="false">Payment</button>
+							</li>
+							<li class="nav-item ms-1 mt-1 mb-1" role="presentation">
+								<button class="nav-link rounded-pill fw-bold" id="changepassword-tab"
+									data-bs-toggle="tab" data-bs-target="#changepassword-tab-pane" type="button"
+									role="tab" aria-controls="changepassword-tab-pane" aria-selected="false">Change
+									Password</button>
+							</li>
+						</ul>
+					</div>
+					<hr class="text-secondary mt-4 mb-4">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel"
+							aria-labelledby="profile-tab" tabindex="0">
+							<div class="row rounded-4 mb-5"
+								style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+								<div class="col ms-4 me-4 mt-4 mb-4">
+									<div class="row">
+										<div class="col">
+											<h1 class="fw-bold" style="font-size: 20px;">My Profile</h1>
+										</div>
+									</div>
+									<hr class="text-secondary">
+									<div class="row mb-3">
+										<label for="inputFirst" class="col-sm-2 col-form-label">First Name</label>
+										<div class="col-sm-10">
+											<input th:value="${firstName}" type="text"
+												class="form-control shadow-none rounded-0 border-0 bg-transparent"
+												id="inputFirst" disabled>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="inputLast" class="col-sm-2 col-form-label">Last Name</label>
+										<div class="col-sm-10">
+											<input th:value="${lastName}" type="text"
+												class="form-control shadow-none rounded-0 border-0 bg-transparent"
+												id="inputLast" disabled>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="inputEmail" class="col-sm-2 col-form-label">Email Address</label>
+										<div class="col-sm-10">
+											<input th:value="${email}" type="email"
+												class="form-control shadow-none rounded-0 border-0 bg-transparent"
+												id="inputEmail" disabled>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="inputPhone" class="col-sm-2 col-form-label">Phone Number</label>
+										<div class="col-sm-10">
+											<input th:value="${phone}" type="text"
+												class="form-control shadow-none rounded-0 border-0 bg-transparent"
+												id="inputPhone" disabled>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="inputGender" class="col-sm-2 col-form-label">Gender</label>
+										<div class="col-sm-10">
+											<input th:value="${gender}"
+												class="form-control shadow-none rounded-0 border-0 bg-transparent"
+												id="inputGender" disabled>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
+										<div class="col-sm-10">
+											<input th:value="${address}" type="text"
+												class="form-control shadow-none rounded-0 border-0 bg-transparent"
+												id="inputAddress" disabled>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="history-tab-pane" role="tabpanel" aria-labelledby="history-tab"
+							tabindex="0">
+							<div class="row rounded-4 mb-5"
+								style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+								<div class="col ms-4 me-4 mt-4 mb-4">
+									<div class="container">
+										<div class="row">
+											<div class="col">
+												<h1 class="fw-bold" style="font-size: 20px;">Order History</h1>
+											</div>
+										</div>
+										<hr class="text-secondary">
+										<div class="col table-responsive">
+											<table class="table table-borderless">
+												<thead class="table-light">
+													<tr>
+														<th>Order ID</th>
+														<th>Address</th>
+														<th>Date</th>
+														<th>Status</th>
+														<th>Actions</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="order : ${orders}">
+														<td>
+															<h1 th:text="${order.orderId}" class="mt-4"
+																style="font-size: 16px"></h1>
+														</td>
+														<td>
+															<h1 th:text="${order.address}" class="mt-4"
+																style="font-size: 16px"></h1>
+														</td>
+														<td>
+															<h1 th:text="${order.orderDate}" class="mt-4"
+																style="font-size: 16px"></h1>
+														</td>
+														<td>
+															<h1 class="mt-4 rounded-pill text-center"
+																style="font-size: 16px; background-color: #FFF2E9"
+																th:text="${order.statusOrder.StatusName}"></h1>
+														</td>
+														<td>
+															<div class="dropdown">
+																<a class="btn rounded-circle d-flex align-items-center justify-content-center mt-2"
+																	href="#" data-bs-toggle="dropdown"
+																	aria-expanded="false"
+																	style="width: 36px; height: 36px; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; position: relative; top: 5px;">
+																	<iconify-icon icon="ph:dots-three-outline-thin"
+																		style="font-size: 21px;"></iconify-icon>
+																</a>
+																<ul class="dropdown-menu border-0 dropdown-menu-end"
+																	style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+																	<li><a class="dropdown-item fcmn"
+																			th:href="@{|/order/detail/${order.orderId}|}"
+																			style="font-size: 13px;"><iconify-icon
+																				class="ms-1 me-2" icon="ph:eye-thin"
+																				style="font-size: 16px; position: relative; top: 3px;"></iconify-icon>View
+																			order
+																		</a>
+																	</li>
+																	<li><a class="dropdown-item fcmn" href="#"
+																			style="font-size: 13px;">
+																			<iconify-icon class="ms-1 me-2"
+																				icon="ph:share-fat-thin"
+																				style="font-size: 16px; position: relative; top: 3px;"></iconify-icon>Share
+																			order
+																		</a>
+																	</li>
+																	<li><a class="dropdown-item fcmn" href="#"
+																			style="font-size: 13px;">
+																			<iconify-icon class="ms-1 me-2"
+																				icon="ph:trash-thin"
+																				style="font-size: 16px; position: relative; top: 3px;"></iconify-icon>Delete
+																			order
+																		</a>
+																	</li>
+																</ul>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="wishlist-tab-pane" role="tabpanel" aria-labelledby="wishlist-tab"
+							tabindex="0">
+							<div class="row rounded-4 mb-5"
+								style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+								<div class="col ms-4 me-4 mt-4 mb-4">
+									<div class="row">
+										<div class="col">
+											<h1 class="fw-bold" style="font-size: 20px;">My Wishlist</h1>
+										</div>
+										<div class="col d-flex justify-content-end">
+											<div class="dropdown">
+												<a class="btn rounded-circle d-flex align-items-center justify-content-center"
+													type="button" data-bs-toggle="dropdown" aria-expanded="false"
+													style="width: 30px; height: 30px;">
+													<iconify-icon icon="ph:dots-three-outline-thin"
+														style="font-size: 20px;"></iconify-icon>
+												</a>
+												<ul class="dropdown-menu border-0 dropdown-menu-end"
+													style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+													<li><a class="dropdown-item fcmn" href="#">
+															<iconify-icon class="me-1" icon="ph:share-network-thin"
+																style="font-size: 18px; position: relative; top: 4px;"></iconify-icon>
+															<span style="font-size: 13px;">Share</span>
+														</a>
+													</li>
+													<li><a class="dropdown-item fcmn" href="#">
+															<iconify-icon class="me-1" icon="ph:trash-thin"
+																style="font-size: 18px; position: relative; top: 4px;"></iconify-icon>
+															<span style="font-size: 13px;">Clear List</span>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<hr class="text-secondary">
+									<div class="row">
+										<div th:each="product : ${products}" class="col-sm-4 mt-5 mb-5">
+											<a th:href="@{/products/{productId}(productId=${product.productId})}">
+												<img th:src="@{|/image/product/${product.image.split(',')[0]}|}"
+													class="card-img-top rounded-0" alt="...">
+											</a>
+											<div class="card hoverimg border-0 rounded-0">
+												<div class="card-body" style="font-family: 'Montserrat', sans-serif;">
+													<div class="row">
+														<div class="col-7">
+															<a th:href="@{/products/{productId}(productId=${product.productId})}"
+																class="text-decoration-none" href="#">
+																<h1 class="card-title text-dark text-truncate"
+																	style="font-size: 14px;">
+																	<th:text th:text="${product.productName}" />
+																</h1>
+															</a>
+															<h1 class="card-title" style="font-size: 14px;">
+																<span class="text-danger">
+																	<th:text th:text="${product.price}" />
+																</span>
+															</h1>
+														</div>
+														<div class="col d-flex justify-content-end">
+															<form action="/favourite/delete" method="post">
+																<input type="hidden" name="productId"
+																	th:value="${product.productId}" />
+																<button type="submit"
+																	class="btn rounded-circle d-flex align-items-center justify-content-center mb-2"
+																	style="width: 30px; height: 30px;">
+																	<iconify-icon icon="ph:trash-thin"
+																		style="font-size: 20px;"></iconify-icon>
+																</button>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="payment-tab-pane" role="tabpanel" aria-labelledby="payment-tab"
+							tabindex="0">
+							<div class="row rounded-4 mb-5"
+								style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+								<div class="col ms-4 me-4 mt-4 mb-4">
+									<div class="row">
+										<div class="col">
+											<h1 class="fw-bold" style="font-size: 20px;">Payment</h1>
+										</div>
+									</div>
+									<hr class="text-secondary">
+									<div class="row d-flex justify-content-center">
+										<div class="col-md-6 col-lg-6">
+											<div class="row mt-3">
+												<div class="col-lg">
+													<h1 class="fw-bold mt-3" style="font-size: 13px;">Payment Type</h1>
+												</div>
+												<div class="col-lg">
+													<div class="row">
+														<div class="col">
+															<h1 class="mt-3" style="font-size: 13px;">Credit Card</h1>
+														</div>
+														<div class="col">
+															<a class="btn border border-secondary rounded-0 w-100"
+																href="#" role="button" data-bs-toggle="modal"
+																data-bs-target="#creditcard">
+																<iconify-icon class="mt-2" icon="logos:mastercard"
+																	style="font-size: 24px;"></iconify-icon>
+															</a>
+														</div>
+														<a class="btn mt-4 rounded-0 text-white" href="#" role="button"
+															style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+															<h1 class="fw-bold mt-2"
+																style="font-size: 13px; display: inline-block; margin-left: 5px;">
+																Change</h1>
+														</a>
+													</div>
+												</div>
+											</div>
+											<!-- Modal Credit Card -->
+											<div class="modal fade" id="creditcard" tabindex="-1"
+												aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-lg">
+													<div class="modal-content">
+														<div class="d-flex justify-content-between">
+															<h1 class="modal-title fw-bold mt-4 ms-3 mb-4"
+																id="exampleModalLabel" style="font-size: 20px;">Payment
+																Methods</h1>
+															<button type="button" class="btn border-0 shadow-none"
+																data-bs-dismiss="modal" aria-label="Close">
+																<iconify-icon class="mt-2" icon="ph:x-thin"
+																	style="font-size: 34px;"></iconify-icon>
+															</button>
+														</div>
+														<div class="row ms-1 me-1">
+															<div class="col-sm mb-3">
+																<div class="card">
+																	<div class="card-body">
+																		<div class="row">
+																			<div class="col-8">
+																				<iconify-icon icon="logos:mastercard"
+																					style="font-size: 24px;"></iconify-icon>
+																			</div>
+																			<div class="col d-flex align-items-center">
+																				<div
+																					class="form-check d-flex justify-content-center">
+																					<input
+																						class="form-check-input shadow-none"
+																						type="radio"
+																						name="radio-buttons" checked>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-sm mb-3">
+																<div class="card">
+																	<div class="card-body">
+																		<div class="row">
+																			<div class="col-8">
+																				<iconify-icon icon="logos:visa"
+																					style="font-size: 24px;"></iconify-icon>
+																			</div>
+																			<div class="col d-flex align-items-center">
+																				<div
+																					class="form-check d-flex justify-content-center">
+																					<input
+																						class="form-check-input shadow-none"
+																						type="radio"
+																						name="radio-buttons">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-sm mb-3">
+																<div class="card">
+																	<div class="card-body">
+																		<div class="row">
+																			<div class="col-8">
+																				<iconify-icon icon="logos:paypal"
+																					style="font-size: 24px;"></iconify-icon>
+																			</div>
+																			<div class="col d-flex align-items-center">
+																				<div
+																					class="form-check d-flex justify-content-center">
+																					<input
+																						class="form-check-input shadow-none"
+																						type="radio"
+																						name="radio-buttons">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-sm mb-3">
+																<div class="card">
+																	<div class="card-body">
+																		<div class="row">
+																			<div class="col-8">
+																				<iconify-icon icon="logos:amex"
+																					style="font-size: 24px;"></iconify-icon>
+																			</div>
+																			<div class="col d-flex align-items-center">
+																				<div
+																					class="form-check d-flex justify-content-center">
+																					<input
+																						class="form-check-input shadow-none"
+																						type="radio"
+																						name="radio-buttons">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row ms-3 me-3 mt-2">
+															<a class="btn col-md-12 col-lg-12 rounded-3 text-white mb-4"
+																href="#"
+																style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+																<h1 class="fw-bold mt-2" style="font-size: 13px;">
+																	Save</h1>
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class=" tab-pane fade" id="changepassword-tab-pane" role="tabpanel"
+							aria-labelledby="changepassword-tab" tabindex="0">
+							<div class="row rounded-4 mb-5"
+								style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+								<div class="col ms-4 me-4 mt-4 mb-4">
+									<div class="row">
+										<div class="col">
+											<h1 class="fw-bold" style="font-size: 20px;">Change
+												Password</h1>
+										</div>
+									</div>
+									<hr class="text-secondary">
+									<div class="row">
+										<div class="col-lg">
+											<div class="row d-flex justify-content-center">
+												<div class="col-md-6 col-lg-7">
+													<h1 class="mt-3 mb-3 fw-bold" style="font-size: 13px;">
+														Passwords
+														must
+														contain:</h1>
+													<h1 style="font-size: 13px;">
+														<iconify-icon class="text-primary me-2" icon="subway:tick"
+															style="font-size: 12px;"></iconify-icon>At
+														least 6 characters
+													</h1>
+													<h1 style="font-size: 13px;">
+														<iconify-icon class="text-primary me-2" icon="subway:tick"
+															style="font-size: 12px;"></iconify-icon>At
+														least 1 upper case
+														letter (A..Z)
+													</h1>
+													<h1 style="font-size: 13px;">
+														<iconify-icon class="text-primary me-2" icon="subway:tick"
+															style="font-size: 12px;"></iconify-icon>At
+														least 1 lower case
+														letter (a..z)
+													</h1>
+													<h1 style="font-size: 13px;">
+														<iconify-icon class="text-primary me-2" icon="subway:tick"
+															style="font-size: 12px;"></iconify-icon>At
+														least 1 number (0..9)
+													</h1>
+												</div>
+											</div>
+										</div>
+										<div class="col">
+											<form th:action="@{/account/change-password}" method="post">
+												<div class="row d-flex justify-content-center">
+													<div class="col-md-6 col-lg-8">
+														<input type="password" name="oldPassword"
+															class="form-control border border-secondary rounded-0 w-100 mt-3 mb-3 shadow-none"
+															placeholder="Current password">
+														<input type="password" name="newPassword"
+															class="form-control border border-secondary rounded-0 w-100 mb-3 shadow-none"
+															placeholder="New password">
+														<input type="password" name="confirmPassword"
+															class="form-control border border-secondary rounded-0 w-100 mb-3 shadow-none"
+															placeholder="Repeat password">
+													</div>
+												</div>
+												<div class="row d-flex justify-content-center">
+													<div class="col-md-6 col-lg-8">
+														<div class="row">
+															<div class="col">
+																<button class="btn rounded-0 text-white w-100" href="#"
+																	value="Change password"
+																	style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+																	<h1 class="fw-bold mt-2" style="font-size: 13px;">
+																		Save</h1>
+																</button>
+															</div>
+														</div>
+														<div class="row mt-4 text-center">
+															<div class="col-md col-lg">
+																<a th:href="@{/account/reset}"
+																	class="rounded-0 w-100 text-dark" href="#">
+																	<h1 style="font-size: 13px;">Try another way</h1>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			const fileInput = document.getElementById('file-input');
+			const previewImage = document.getElementById('preview-image');
+
+			fileInput.addEventListener('change', function (event) {
+				const file = event.target.files[0];
+				const reader = new FileReader();
+
+				reader.onload = function (e) {
+					const imageUrl = e.target.result;
+					previewImage.src = imageUrl;
+					uploadButton.style.display = 'block';
+				};
+
+				reader.readAsDataURL(file);
+			});
+		</script>
+	</main>
+</body>
+
+</html>

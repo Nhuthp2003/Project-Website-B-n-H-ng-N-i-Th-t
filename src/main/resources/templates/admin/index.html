@@ -1,0 +1,1368 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Admin</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" type="image/x-icon" href="../image/home/icon.webp">
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- icon iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['line'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Day');
+            data.addColumn('number', 'Orders');
+            data.addColumn('number', 'Revenue');
+            data.addColumn('number', 'Customers');
+            data.addColumn('number', 'Invoices');
+
+            data.addRows([
+                [1, 37.8, 80.8, 41.8, 15.8],
+                [2, 30.9, 69.5, 32.4, 22.3],
+                [3, 25.4, 57, 25.7, 22.3],
+                [4, 11.7, 18.8, 10.5, 30.4],
+                [5, 11.9, 17.6, 10.4, 20.8],
+                [6, 8.8, 13.6, 7.7, 23.8],
+                [7, 7.6, 12.3, 9.6, 13.4],
+                [8, 12.3, 29.2, 10.6, 22.8],
+                [9, 16.9, 42.9, 14.8, 23.2],
+                [10, 12.8, 30.9, 11.6, 20.8],
+                [11, 5.3, 7.9, 4.7, 10.8],
+                [12, 6.6, 8.4, 5.2, 14.4],
+                [13, 4.8, 6.3, 3.6, 8.2],
+                [14, 4.2, 6.2, 3.4, 6.8]
+            ]);
+
+            var options = {
+                width: 900,
+                height: 500,
+                axes: {
+                    x: {
+                        0: { side: 'top' }
+                    }
+                },
+                backgroundColor: 'transparent'
+            };
+
+            var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+    </script>
+</head>
+<body>
+    <main ng-app="spaApp">
+        <div class="custom-bg">
+            <div class="container-xl" style="font-family: 'Montserrat', sans-serif;">
+                <div class="row mt-4 rounded-5" style="background: rgba(255,255,255,0.3);
+                -webkit-backdrop-filter: blur(8px);
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255,255,255,0.15); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                    <div class="col-lg-3">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="dropdown mt-4">
+                                    <button class="btn border-0 ms-2 me-1" type="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <img style="width: 30px; height: 30px;" th:src="@{|/image/home/${imageName}|}"
+                                            class="img-fluid rounded-circle" alt="...">
+                                        <span class="fw-bold text-dark ms-2 me-1 text-decoration-underline" style="font-size: 14px;">
+                                        	<span th:text="${lastName}"></span> <span th:text="${firstName}"></span>
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu border-0 ms-3"
+                                        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                        <li><a class="dropdown-item fw-bold" href="#" data-bs-toggle="modal"
+                                                data-bs-target="#profile" style="font-size: 13px;"><iconify-icon
+                                                    class="ms-1 me-2" icon="prime:user"
+                                                    style="font-size: 20px; position: relative; top: 5px;"></iconify-icon>Profile</a>
+                                        </li>
+                                        <li><a class="dropdown-item fw-bold" href="#"
+                                                style="font-size: 13px;"><iconify-icon class="ms-1 me-2"
+                                                    icon="prime:cog"
+                                                    style="font-size: 20px; position: relative; top: 5px;"></iconify-icon>Settings
+                                            </a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a th:href="@{/account/logout}" class="dropdown-item fw-bold" href="#" style="font-size: 13px;">
+                                                <iconify-icon class="ms-1 me-2" icon="prime:sign-out"
+                                                    style="font-size: 20px; position: relative; top: 5px;"></iconify-icon>Sign
+                                                Out</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <nav class="navbar navbar-expand-lg mt-3">
+                                    <div class="container-fluid d-flex justify-content-end">
+                                        <button class="navbar-toggler border-0 shadow-none text-dark" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#dashboardnavbar"
+                                            aria-controls="dashboardnavbar" aria-expanded="false"
+                                            aria-label="Toggle navigation">
+                                            <iconify-icon icon="prime:align-right" style="font-size: 28px;"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                                    <div class="container-fluid">
+                                        <div class="collapse navbar-collapse" id="dashboardnavbar">
+                                            <ul class="navbar-nav flex-column hvafc">
+                                                <li class="nav-item">
+                                                    <a class="nav-link fw-bold mb-2 rounded-3" href="#!/dashboard">
+                                                        <iconify-icon class="ms-3 me-2"
+                                                            icon="majesticons:home-analytics-line"
+                                                            style="font-size: 24px; position: relative; top: 3.7px;"></iconify-icon>
+                                                        <span class="me-4"
+                                                            style="font-size: 16px; position: relative; bottom: 2.7px;">Dashboard</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link fw-bold mb-2 rounded-3" href="#!/product">
+                                                        <iconify-icon class="ms-3 me-2" icon="majesticons:box-line"
+                                                            style="font-size: 24px; position: relative; top: 3.7px;"></iconify-icon>
+                                                        <span
+                                                            style="font-size: 16px; position: relative; bottom: 2.7px;">Products</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link fw-bold mb-2 rounded-3" href="#!/category">
+                                                        <iconify-icon class="ms-3 me-2"
+                                                            icon="majesticons:shopping-cart-line"
+                                                            style="font-size: 24px; position: relative; top: 3.7px;"></iconify-icon>
+                                                        <span
+                                                            style="font-size: 16px; position: relative; bottom: 2.7px;">Categories</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link fw-bold mb-2 rounded-3" href="#!/order">
+                                                        <iconify-icon class="ms-3 me-2"
+                                                            icon="majesticons:noteblock-text-line"
+                                                            style="font-size: 24px; position: relative; top: 3.7px;"></iconify-icon>
+                                                        <span
+                                                            style="font-size: 16px; position: relative; bottom: 2.7px;">Orders</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link fw-bold mb-2 rounded-3" href="#!/customer">
+                                                        <iconify-icon class="ms-3 me-2" icon="majesticons:user-line"
+                                                            style="font-size: 24px; position: relative; top: 3.7px;"></iconify-icon>
+                                                        <span
+                                                            style="font-size: 16px; position: relative; bottom: 2.7px;">Customers</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link fw-bold mb-2 rounded-3" href="#!/analytic">
+                                                        <iconify-icon class="ms-3 me-2"
+                                                            icon="majesticons:analytics-line"
+                                                            style="font-size: 24px; position: relative; top: 3.7px;"></iconify-icon>
+                                                        <span
+                                                            style="font-size: 16px; position: relative; bottom: 2.7px;">Analytics</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col rounded-5" style="background: rgba(255,255,255,0.2);
+                    -webkit-backdrop-filter: blur(5px);
+                    backdrop-filter: blur(5px);
+                    border: 1px solid rgba(255,255,255,0.1);">
+                        <!-- main -->
+                        <div class="row mt-4 ms-2 me-2 overflow-auto" style="height: 620px;">
+                        	<div ng-view></div>	
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Profile Modal -->
+        <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="font-family: 'Montserrat', sans-serif;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-5 rounded-3" style="background-color: #EFF0F2;">
+                                <div class="container">
+                                    <div class="row mt-5 mb-5">
+                                        <div class="col text-center">
+										    <input type="file" id="file-input" style="display: none;">
+										    <label for="file-input" class="mb-4">
+										        <img id="preview-image" style="width: 160px; height: 160px;" th:src="@{|/image/home/${imageName}|}"
+										            class="img-fluid rounded-circle" alt="...">
+										    </label>
+										    <div class="d-flex justify-content-center">
+									            <button id="upload-button" type="button" class="btn btn-outline-dark btn-lg rounded-pill" 
+									                style="display: none;">
+									                <h1 class="fw-bold mt-2 me-2 ms-2" style="font-size: 13px;">Upload Now</h1>
+									            </button>
+									        </div>
+										</div>
+										
+										<script>
+										    const fileInput = document.getElementById('file-input');
+										    const previewImage = document.getElementById('preview-image');
+										    const uploadButton = document.getElementById('upload-button');
+										
+										    fileInput.addEventListener('change', function (event) {
+										        const file = event.target.files[0];
+										        const reader = new FileReader();
+										
+										        reader.onload = function (e) {
+										            const imageUrl = e.target.result;
+										            previewImage.src = imageUrl;
+										            uploadButton.style.display = 'block';
+										        };
+										
+										        reader.readAsDataURL(file);
+										    });
+										</script>
+
+                                    </div>
+                                    <form>
+                                        <div class="mt-3 mb-3">
+                                            <label for="current" class="form-label">Current Passowrd</label>
+                                            <input type="password" class="form-control shadow-none border-0"
+                                                id="current">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="new" class="form-label">New Passowrd</label>
+                                            <input type="password" class="form-control shadow-none border-0" id="new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="confirm" class="form-label">Confirm Passowrd</label>
+                                            <input type="password" class="form-control shadow-none border-0"
+                                                id="confirm">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex justify-content-between">
+                                    <h1 class="fw-bold mt-4 ms-3 mb-4" id="exampleModalLabel" style="font-size: 20px;">
+                                        My Profile
+                                    </h1>
+                                    <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <iconify-icon class="mt-2" icon="iconamoon:close-thin"
+                                            style="font-size: 34px;"></iconify-icon>
+                                    </button>
+                                </div>
+                                <div class="container">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input th:value="${firstName}" type="text" class="form-control shadow-none border-0"
+                                                style="background-color: #EFF0F2;" id="firstname">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input th:value="${lastName}" type="text" class="form-control shadow-none border-0"
+                                                style="background-color: #EFF0F2;" id="lastname">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" th:value="${#request.remoteUser}" class="form-control shadow-none border-0"
+                                                style="background-color: #EFF0F2;" id="email">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="phone" class="form-label">Phone</label>
+                                                    <input th:value="${phone}" type="text" class="form-control shadow-none border-0"
+                                                        style="background-color: #EFF0F2;" id="phone">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="location" class="form-label">Gender</label>
+                                                    <select th:value="${gender}" class="form-select shadow-none border-0"
+                                                        style="background-color: #EFF0F2;" id="location"
+                                                        aria-label="Default select example">
+                                                        <option value="1">Female</option>
+                                                        <option value="2">Male</option>
+                                                        <option value="3">Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label">Address</label>
+                                            <textarea th:text="${address}" class="form-control shadow-none mb-3 border-0"
+                                                 id="address" style="background-color: #EFF0F2; height: 184px;"></textarea>
+                                        </div>
+                                        <div class="text-end">
+                                            <button class="btn col-md-6 col-lg-4 rounded-3 text-white mb-3"
+                                                style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+                                                <h1 class="fw-bold mt-2" style="font-size: 13px;">Save
+                                                </h1>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--Delete Modal -->
+        <div class="modal fade" id="deleteproduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            style="font-family: 'Montserrat', sans-serif;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class=" d-flex justify-content-end">
+                        <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <iconify-icon class="mt-2" icon="iconamoon:close-thin"
+                                style="font-size: 34px;"></iconify-icon>
+                        </button>
+                    </div>
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-2 bg-light rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 80px; height: 80px;">
+                            <iconify-icon icon="ion:warning" style="font-size: 44px; color: #FF313A;"></iconify-icon>
+                        </div>
+                        <h1 class="fw-bold mt-5" style="font-size: 16px;">You are about to delete a product</h1>
+                        <h1 class="mt-3" style="font-size: 16px;">This will delete your product from catalog<br>
+                            Are you sure?</h1>
+                    </div>
+                    <div class="mt-4 mb-4 d-flex justify-content-center">
+                        <button type="button" class="btn w-25 btn-light m-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn w-25 fw-bold m-2 text-white delete-button" data-bs-dismiss="modal"
+                            style="background-color: #FF313A;">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Edit product Offcanvas-->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="editproduct" aria-labelledby="offcanvasRightLabel"
+            style="font-family: 'Montserrat', sans-serif;">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title fw-bold" id="offcanvasRightLabel">Edit Product</h5>
+                <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <iconify-icon icon="iconamoon:close-thin" style="font-size: 34px;"></iconify-icon>
+                </button>
+            </div>
+            <div class="offcanvas-body">
+                <h1 class="fw-bold mt-2" style="font-size: 13px;">Product Image</h1>
+                <div class="d-flex justify-content-center align-items-center rounded-4 mt-3 mb-3 text-secondary"
+                    style="border: 2px dashed;" id="uploadSquare">
+                    <input type="file" id="fileInput" class="form-control-file d-none">
+                    <label for="fileInput" style="cursor: pointer;">
+                        <span class="mt-5 mb-3"
+                            style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                            <iconify-icon icon="akar-icons:image" style="font-size: 24px;"></iconify-icon>
+                        </span>
+                        <span class="fw-bold mb-4"
+                            style="display: flex; justify-content: center; align-items: center; height: 100%; font-size: 13px;">
+                            Upload your product image.
+                        </span>
+                    </label>
+                </div>
+                <h1 class="fw-bold" style="font-size: 13px;">Status</h1>
+                <div class="mt-3 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input shadow-none" type="radio" name="status" id="available"
+                            value="available">
+                        <label class="form-check-label" for="available">
+                            Available
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input shadow-none" type="radio" name="status" id="outofstock"
+                            value="outofstock">
+                        <label class="form-check-label" for="outofstock">
+                            Out of stock
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input shadow-none" type="radio" name="status" id="newarrival"
+                            value="newarrival">
+                        <label class="form-check-label" for="newarrival">
+                            New arrival
+                        </label>
+                    </div>
+                </div>
+                <h1 class="fw-bold" style="font-size: 13px;">Created Date</h1>
+                <input type="date" class="form-control shadow-none mt-3 mb-3">
+                <h1 class="fw-bold mb-3" style="font-size: 13px;">Shipping Cost</h1>
+                <input type="text" class="form-control shadow-none" placeholder="Cost">
+                <h1 class="fw-bold mt-3" style="font-size: 13px;">Basic Information
+                </h1>
+                <form class="mt-3">
+                    <input type="text" class="form-control shadow-none mb-3" placeholder="Product Name">
+                    <select class="form-select mb-3 shadow-none" aria-label="Default select example">
+                        <option selected>Category</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </form>
+                <textarea class="form-control shadow-none mb-3" placeholder="Description"
+                    style="height: 143px;"></textarea>
+                <h1 class="fw-bold mb-3" style="font-size: 13px;">Stock & Pricing
+                </h1>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control shadow-none mb-3" placeholder="Stock">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control shadow-none mb-3" placeholder="Price">
+                    </div>
+                </div>
+                <h1 class="fw-bold mb-3" style="font-size: 13px;">SKU</h1>
+                <input type="text" class="form-control shadow-none mb-3" placeholder="SKU">
+                <h1 class="fw-bold" style="font-size: 13px;">Updated Date</h1>
+                <input type="date" class="form-control shadow-none mt-3 mb-3">
+                <div class="container">
+                    <div class="row flex-column-reverse flex-md-row d-flex justify-content-end mt-3">
+                        <a class="btn btn-light col-md-3 col-lg-3 rounded-3 m-1" href="#" role="button"
+                            data-bs-dismiss="offcanvas" aria-label="Close">
+                            <h1 class="mt-2" style="font-size: 13px;">Cancel
+                            </h1>
+                        </a>
+                        <a class="btn col-md-6 col-lg-6 rounded-3 text-white m-1" href="#" role="button"
+                            style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+                            <h1 class="fw-bold mt-2" style="font-size: 13px;">Save Product
+                            </h1>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Edit Category Offcanvas-->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="editcategory" aria-labelledby="offcanvasRightLabel"
+            style="font-family: 'Montserrat', sans-serif;">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title fw-bold" id="offcanvasRightLabel">Edit Category</h5>
+                <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <iconify-icon icon="iconamoon:close-thin" style="font-size: 34px;"></iconify-icon>
+                </button>
+            </div>
+            <div class="offcanvas-body">
+                <h1 class="fw-bold mt-3" style="font-size: 13px;">Category Image</h1>
+                <div class="d-flex justify-content-center align-items-center rounded-4 mt-3 mb-3 text-secondary"
+                    style="border: 2px dashed;" id="uploadSquare">
+                    <input type="file" id="fileInput" class="form-control-file d-none">
+                    <label for="fileInput" style="cursor: pointer;">
+                        <span class="mt-5 mb-3"
+                            style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                            <iconify-icon icon="prime:image" style="font-size: 24px;"></iconify-icon>
+                        </span>
+                        <span class="fw-bold mb-4"
+                            style="display: flex; justify-content: center; align-items: center; height: 100%; font-size: 13px;">
+                            Upload your category image.
+                        </span>
+                    </label>
+                </div>
+                <h1 class="fw-bold mb-3" style="font-size: 13px;">Category ID
+                </h1>
+                <input type="text" class="form-control shadow-none mb-3" placeholder="Category ID">
+                <h1 class="fw-bold mb-3" style="font-size: 13px;">Category Name
+                </h1>
+                <input type="text" class="form-control shadow-none mb-3" placeholder="Category Name">
+                <h1 class="fw-bold mb-3" style="font-size: 13px;">Parent
+                </h1>
+                <select class="form-select mb-3 shadow-none" aria-label="Default select example">
+                    <option value="1">Living</option>
+                    <option value="2">Dining</option>
+                    <option value="3">Bedroom</option>
+                    <option value="4">Outdoor</option>
+                    <option value="5">Lighting</option>
+                    <option value="6">Decor</option>
+                </select>
+                <h1 class="fw-bold mb-3" style="font-size: 13px;">Description
+                </h1>
+                <textarea class="form-control shadow-none mb-3" placeholder="Description Here" rows="5"></textarea>
+                <div class="container">
+                    <div class="row flex-column-reverse flex-md-row d-flex justify-content-end mt-3">
+                        <a class="btn btn-light col-md-3 col-lg-3 rounded-3 m-1" href="#" role="button"
+                            data-bs-dismiss="offcanvas" aria-label="Close">
+                            <h1 class="mt-2" style="font-size: 13px;">Cancel
+                            </h1>
+                        </a>
+                        <a class="btn col-md-6 col-lg-6 rounded-3 text-white m-1" href="#" role="button"
+                            style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+                            <h1 class="fw-bold mt-2" style="font-size: 13px;">Save Category
+                            </h1>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--Delete Modal -->
+        <div class="modal fade" id="deletecategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            style="font-family: 'Montserrat', sans-serif;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class=" d-flex justify-content-end">
+                        <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <iconify-icon class="mt-2" icon="iconamoon:close-thin"
+                                style="font-size: 34px;"></iconify-icon>
+                        </button>
+                    </div>
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-2 bg-light rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 80px; height: 80px;">
+                            <iconify-icon icon="ion:warning" style="font-size: 44px; color: #FF313A;"></iconify-icon>
+                        </div>
+                        <h1 class="fw-bold mt-5" style="font-size: 16px;">You are about to delete a category</h1>
+                        <h1 class="mt-3" style="font-size: 16px;">This will delete your category from catalog<br>
+                            Are you sure?</h1>
+                    </div>
+                    <div class="mt-4 mb-4 d-flex justify-content-center">
+                        <button type="button" class="btn w-25 btn-light m-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn w-25 fw-bold m-2 text-white"
+                            style="background-color: #FF313A;">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    	<!--View Order Details Modal -->
+        <div class="modal fade" id="vieworderdetails" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" style="font-family: 'Montserrat', sans-serif;">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <iconify-icon class="mt-2" icon="iconamoon:close-thin"
+                                style="font-size: 34px;"></iconify-icon>
+                        </button>
+                    </div>
+                    <div class="row ms-2 me-2">
+                        <div class="col-md-12 col-lg">
+                            <div class="container">
+                                <div class="row bg-light mt-3 mb-3 rounded-3 d-flex justify-content-between"
+                                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                    <div class="col-md-12 col-lg-6">
+                                        <h1 class="mt-2" style="font-size: 16px;">Order ID: #26BC663E</h1>
+                                        <h1 class="mt-2 text-secondary" style="font-size: 13px;">Order Created: Jan 26,
+                                            2023 10:30 AM
+                                        </h1>
+                                    </div>
+                                    <div class="col-md-12 col-lg-2">
+                                        <a class="btn rounded-3 w-100 mt-2 mb-2" href="#"
+                                            style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; background-color: #0989FF;">
+                                            <h1 class="fw-bold mt-2 text-white" style="font-size: 13px;">Save
+                                            </h1>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-4 p-2">
+                                    <div class="row bg-light rounded-3 ms-1 me-1 mb-2"
+                                        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                        <h1 class="mt-2 fw-bold" style="font-size: 16px;">Customer Details
+                                        </h1>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-4 text-secondary fw-bold" style="font-size: 13px;">
+                                                        Name</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-4 fw-bold" style="font-size: 13px;">John Wick</h1>
+                                                </div>
+                                            </div>
+                                            <hr class="text-secondary">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-1 text-secondary fw-bold" style="font-size: 13px;">
+                                                        Email</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-1 text-secondary" style="font-size: 13px;">
+                                                        johnwick@gmail.com</h1>
+                                                </div>
+                                            </div>
+                                            <hr class="text-secondary">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-1 mb-4 text-secondary fw-bold"
+                                                        style="font-size: 13px;">
+                                                        Phone</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-1 mb-4 text-secondary" style="font-size: 13px;">0999
+                                                        888 777</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-4 p-2">
+                                    <div class="row bg-light rounded-3 ms-1 me-1 mb-2"
+                                        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                        <h1 class="mt-2 fw-bold" style="font-size: 16px;">Order Summary
+                                        </h1>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-4 text-secondary fw-bold" style="font-size: 13px;">
+                                                        Order Date</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-4 text-secondary" style="font-size: 13px;">04/05/2023
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                            <hr class="text-secondary">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-1 text-secondary fw-bold" style="font-size: 13px;">
+                                                        Payment Method</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-1 text-secondary" style="font-size: 13px;">
+                                                        Online
+                                                        <iconify-icon icon="logos:visa"
+                                                            style="font-size: 13px;"></iconify-icon>
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                            <hr class="text-secondary">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-1 mb-4 text-secondary fw-bold"
+                                                        style="font-size: 13px;">
+                                                        Shipping Method</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-1 mb-4 text-secondary" style="font-size: 13px;">
+                                                        Cash On Delivery
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-4 p-2">
+                                    <div class="row bg-light rounded-3 ms-1 me-1 mb-2"
+                                        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                        <h1 class="mt-2 fw-bold" style="font-size: 16px;">Deliver To
+                                        </h1>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-4 text-secondary fw-bold" style="font-size: 13px;">
+                                                        House</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-4 text-secondary" style="font-size: 13px;">7765 Spring
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                            <hr class="text-secondary">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-1 text-secondary fw-bold" style="font-size: 13px;">
+                                                        Street</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-1 text-secondary" style="font-size: 13px;">
+                                                        3169 Hamilton Drive
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                            <hr class="text-secondary">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-1 mb-4 text-secondary fw-bold"
+                                                        style="font-size: 13px;">
+                                                        State</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-1 mb-4 text-secondary" style="font-size: 13px;">
+                                                        Ha Noi
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-8 p-2 mb-3">
+                                    <div class="row bg-light rounded-3 ms-1 me-1"
+                                        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col table-responsive overflow-auto"
+                                                    style="height: 219.6px;">
+                                                    <table class="table table-borderless">
+                                                        <thead style="font-size: 13px;">
+                                                            <tr class="text-secondary">
+                                                                <th scope="col" class="w-50">Product</th>
+                                                                <th scope="col">Price</th>
+                                                                <th scope="col">Quantity</th>
+                                                                <th scope="col">Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody style="font-size: 13px;">
+                                                            <tr>
+                                                                <td>
+                                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-1.jpg"
+                                                                        class="img-fluid rounded-3" alt="..."
+                                                                        style="width: 40px; height: 40px;">
+                                                                    <span class="fw-bold ms-1"
+                                                                        style="font-size: 13px;">Whitetails Women's Open
+                                                                        Sky
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $171.00
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        37
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $1200.33
+                                                                    </h1>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-2.jpg"
+                                                                        class="img-fluid rounded-3" alt="..."
+                                                                        style="width: 40px; height: 40px;">
+                                                                    <span class="fw-bold ms-1"
+                                                                        style="font-size: 13px;">Whitetails Women's Open
+                                                                        Sky
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $171.00
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        37
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $1200.33
+                                                                    </h1>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-3.jpg"
+                                                                        class="img-fluid rounded-3" alt="..."
+                                                                        style="width: 40px; height: 40px;">
+                                                                    <span class="fw-bold ms-1"
+                                                                        style="font-size: 13px;">Whitetails Women's Open
+                                                                        Sky
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $171.00
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        37
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $1200.33
+                                                                    </h1>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-3.jpg"
+                                                                        class="img-fluid rounded-3" alt="..."
+                                                                        style="width: 40px; height: 40px;">
+                                                                    <span class="fw-bold ms-1"
+                                                                        style="font-size: 13px;">Whitetails Women's Open
+                                                                        Sky
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $171.00
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        37
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $1200.33
+                                                                    </h1>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-3.jpg"
+                                                                        class="img-fluid rounded-3" alt="..."
+                                                                        style="width: 40px; height: 40px;">
+                                                                    <span class="fw-bold ms-1"
+                                                                        style="font-size: 13px;">Whitetails Women's Open
+                                                                        Sky
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $171.00
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        37
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $1200.33
+                                                                    </h1>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-3.jpg"
+                                                                        class="img-fluid rounded-3" alt="..."
+                                                                        style="width: 40px; height: 40px;">
+                                                                    <span class="fw-bold ms-1"
+                                                                        style="font-size: 13px;">Whitetails Women's Open
+                                                                        Sky
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $171.00
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        37
+                                                                    </h1>
+                                                                </td>
+                                                                <td>
+                                                                    <h1
+                                                                        style="font-size: 13px; position: relative; top: 10px;">
+                                                                        $1200.33
+                                                                    </h1>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-4 p-2 mb-3">
+                                    <div class="row bg-light rounded-3 ms-1 me-1"
+                                        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                        <h1 class="mt-2 fw-bold" style="font-size: 16px;">Order Price
+                                        </h1>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-4 text-secondary fw-bold" style="font-size: 13px;">
+                                                        Subtotal</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-4 text-secondary" style="font-size: 13px;">$1237.00
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                            <hr class="text-secondary">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-1 text-secondary fw-bold" style="font-size: 13px;">
+                                                        Shipping cost:</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-1 text-secondary" style="font-size: 13px;">
+                                                        $49.55</h1>
+                                                </div>
+                                            </div>
+                                            <hr class="text-secondary">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="mt-1 mb-4 text-secondary fw-bold"
+                                                        style="font-size: 13px;">
+                                                        Grand total:</h1>
+                                                </div>
+                                                <div class="col text-end">
+                                                    <h1 class="mt-1 mb-4 fw-bold" style="font-size: 13px;">
+                                                        $1310.55
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<!--View Invoices Details Modal -->
+        <div class="modal fade" id="viewinvoisedetails" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" style="font-family: 'Montserrat', sans-serif;">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <iconify-icon class="mt-2" icon="iconamoon:close-thin"
+                                style="font-size: 34px;"></iconify-icon>
+                        </button>
+                    </div>
+                    <div class="row ms-2 me-2">
+                        <div class="container GFG" style="font-family: 'Montserrat', sans-serif;">
+                            <div class="row d-flex justify-content-center mb-5">
+                                <div class="col-lg-6 bg-light"
+                                    style="box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;">
+                                    <div class="row">
+                                        <div class="col-sm bg-dark">
+                                            <h1 class="text-white fw-bold text-end me-4 mt-4 mb-4">INVOICE</h1>
+                                        </div>
+                                        <div class="col mt-4">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="container">
+                                                        <h1 class="fw-bold" style="font-size: 13px;">ARPHOR</h1>
+                                                        <h1 class="fw-bold" style="font-size: 13px;">Welcome!</h1>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 bg-dark"></div>
+                                            </div>
+                                        </div>
+                                        <hr class="mt-3">
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <h1 class="fw-bold mt-3 mb-3" style="font-size: 13px;">BILLING TO:</h1>
+                                            <div class="col">
+                                                <h1 style="font-size: 13px;">Email</h1>
+                                                <h1 style="font-size: 13px;">Name</h1>
+                                                <h1 style="font-size: 13px;">Phone</h1>
+                                                <h1 style="font-size: 13px;">Address</h1>
+                                            </div>
+                                            <div class="col text-end">
+                                                <h1 style="font-size: 13px;">nhatquang45013@gmail.com</h1>
+                                                <h1 style="font-size: 13px;">Điểu Nhật Quang</h1>
+                                                <h1 style="font-size: 13px;">0397302140</h1>
+                                                <h1 style="font-size: 13px;">42/1 Tô ký, Trung mỹ tây, Quận 12, Thành
+                                                    phố Hồ Chí Minh
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="bg-dark">
+                                            <div class="container">
+                                                <div class="row text-white">
+                                                    <div class="col-4">
+                                                        <h1 class="fw-bold mt-2" style="font-size: 13px;">PRODUCT</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="fw-bold mt-2" style="font-size: 13px;">PRICE</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="fw-bold mt-2" style="font-size: 13px;">QTY</h1>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <h1 class="fw-bold mt-2" style="font-size: 13px;">TOTAL</h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col mt-2">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h1 class="mt-2" style="font-size: 13px;">Login Design</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="mt-2" style="font-size: 13px;">$256.00</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="mt-2" style="font-size: 13px;">1</h1>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <h1 class="mt-2" style="font-size: 13px;">$256.00</h1>
+                                                    </div>
+                                                </div>
+                                                <hr class="text-secondary mt-1 mb-1">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h1 class="mt-2" style="font-size: 13px;">Login Design</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="mt-2" style="font-size: 13px;">$256.00</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="mt-2" style="font-size: 13px;">1</h1>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <h1 class="mt-2" style="font-size: 13px;">$256.00</h1>
+                                                    </div>
+                                                </div>
+                                                <hr class="text-secondary mt-1 mb-1">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h1 class="mt-2" style="font-size: 13px;">Login Design</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="mt-2" style="font-size: 13px;">$256.00</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="mt-2" style="font-size: 13px;">1</h1>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <h1 class="mt-2" style="font-size: 13px;">$256.00</h1>
+                                                    </div>
+                                                </div>
+                                                <hr class="text-secondary mt-1 mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-6">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h1 class="fw-bold mt-3" style="font-size: 13px;">SHIPPING</h1>
+                                                        <h1 class="fw-bold mt-3" style="font-size: 13px;">TOTAL</h1>
+                                                    </div>
+                                                    <div class="col text-end">
+                                                        <h1 class="mt-3" style="font-size: 13px;">$32</h1>
+                                                        <h1 class="mt-3" style="font-size: 13px;">$800.00</h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="container">
+                                                <a class="btn border border-secondary rounded-0 btn-lg mt-3 w-100"
+                                                    href="#" role="button">
+                                                    <h1 class="mt-2" style="font-size: 13px;"><iconify-icon class="me-2"
+                                                            icon="prime:download"
+                                                            style="font-size: 13px; position: relative; top: 2px;"></iconify-icon>Download
+                                                        invoice</h1>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row bg-dark mt-4">
+                                        <div class="col">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-lg mt-3 mb-3">
+                                                        <div class="d-flex justify-content-evenly">
+                                                            <a class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px;">
+                                                                <iconify-icon icon="ri:pinterest-fill"
+                                                                    style="font-size: 13px;"></iconify-icon>
+                                                            </a>
+                                                            <a class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px;">
+                                                                <iconify-icon icon="ri:twitter-x-fill"
+                                                                    style="font-size: 13px;"></iconify-icon>
+                                                            </a>
+                                                            <a class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px;">
+                                                                <iconify-icon icon="ri:facebook-fill"
+                                                                    style="font-size: 13px;"></iconify-icon>
+                                                            </a>
+                                                            <a class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px;">
+                                                                <iconify-icon icon="ri:dribbble-fill"
+                                                                    style="font-size: 13px;"></iconify-icon>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg mt-3 mb-3 text-center">
+                                                        <h1 class="fw-bold mt-2 text-light" style="font-size: 13px;">
+                                                            Thank you!</h1>
+                                                    </div>
+                                                    <div class="col-lg mt-3 mb-3 text-center">
+                                                        <h1 class="fw-bold mt-2 text-light" style="font-size: 13px;">
+                                                            mail@arphor.com</h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    	<!--Delete Custommer Modal -->
+        <div class="modal fade" id="deletecustommer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            style="font-family: 'Montserrat', sans-serif;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <iconify-icon class="mt-2" icon="iconamoon:close-thin"
+                                style="font-size: 34px;"></iconify-icon>
+                        </button>
+                    </div>
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-2 bg-light rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 80px; height: 80px;">
+                            <iconify-icon icon="ion:warning" style="font-size: 44px; color: #FF313A;"></iconify-icon>
+                        </div>
+                        <h1 class="fw-bold mt-5" style="font-size: 16px;">You are about to delete a customers</h1>
+                        <h1 class="mt-3" style="font-size: 16px;">This will delete your customers from catalog<br>
+                            Are you sure?</h1>
+                    </div>
+                    <div class="mt-4 mb-4 d-flex justify-content-center">
+                        <button type="button" class="btn w-25 btn-light m-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn w-25 fw-bold m-2 text-white"
+                            style="background-color: #FF313A;">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    	
+    	<!--View Customer Details Modal -->
+        <div class="modal fade" id="viewcustomerdetails" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" style="font-family: 'Montserrat', sans-serif;">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn border-0 shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <iconify-icon class="mt-2" icon="iconamoon:close-thin"
+                                style="font-size: 34px;"></iconify-icon>
+                        </button>
+                    </div>
+                    <div class="row ms-2 me-2">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="container">
+                                <div class="row bg-light mt-3 mb-3 rounded-3"
+                                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                    <div class="text-center">
+                                        <img src="https://www.cnet.com/a/img/resize/d30d7c3bca5bd9999e074ff073d0a986b7b405bd/hub/2023/07/18/adec38b2-8321-43be-a643-17f4a633cf01/john-wick-4-2.jpg?auto=webp&fit=crop&height=1200&width=1200"
+                                            class="img-fluid rounded-circle mt-4" style="width: 96px; height: 96px;"
+                                            alt="...">
+                                        <h1 class="fw-bold mt-4" style="font-size: 16px;">John Wick</h1>
+                                        <a class="text-decoration-none" href="#"
+                                            style="font-size: 13px;">johnwick@gmail.com</a>
+                                        <h1 class="text-secondary mt-2 mb-2" style="font-size: 13px;">+84 <span
+                                                class="text-dark">0999 888 777</span></h1>
+                                    </div>
+                                    <div class="container mb-2">
+                                        <hr class="text-secondary">
+                                        <h1 class="fw-bold" style="font-size: 13px;">Last Order</h1>
+                                        <h1 style="font-size: 13px;">7 days ago - <a class="text-decoration-none"
+                                                href="#">#80294</a></h1>
+                                        <h1 class="fw-bold" style="font-size: 13px;">Average Order Value</h1>
+                                        <h1 style="font-size: 13px;">$574.00</h1>
+                                        <h1 class="fw-bold" style="font-size: 13px;">Registered</h1>
+                                        <h1 style="font-size: 13px;">2 months ago</h1>
+                                        <h1 class="fw-bold" style="font-size: 13px;">Email Marketing</h1>
+                                        <h1 style="font-size: 13px;">Subscribed</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="container">
+                                <div class="row bg-light mt-3 mb-3 rounded-3"
+                                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                    <div class="container mt-2 mb-2">
+                                        <textarea class="form-control border-0 shadow-none"
+                                            placeholder="Notes about customer" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row bg-light mt-3 mb-3 rounded-3"
+                                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                    <div class="container mt-2">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <h1 class="fw-bold" style="font-size: 13px;">Orders</h1>
+                                            </div>
+                                            <div class="col">
+                                                <h1 class="text-end" style="font-size: 13px;">Total spent $34,980.34
+                                                    on 7 orders</h1>
+                                            </div>
+                                            <table class="table table-borderless" style="font-size: 13px;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="text-decoration-none" href="#">#80294</a>
+                                                        </td>
+                                                        <td>Today at 6:10 pm</td>
+                                                        <td>Pending</td>
+                                                        <td>4 items</td>
+                                                        <td>$320.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="text-decoration-none" href="#">#63736</a>
+                                                        </td>
+                                                        <td>May 15, 2019</td>
+                                                        <td>Completed</td>
+                                                        <td>7 items</td>
+                                                        <td>$2,574.31</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="text-decoration-none" href="#">#63501</a>
+                                                        </td>
+                                                        <td>January 7, 2019</td>
+                                                        <td>Completed</td>
+                                                        <td>1 items</td>
+                                                        <td>$34.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="text-decoration-none" href="#">#40278</a>
+                                                        </td>
+                                                        <td>October 19, 2018</td>
+                                                        <td>Completed</td>
+                                                        <td>2 items</td>
+                                                        <td>$704.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <h1 class="text-center" style="font-size: 13px;">
+                                                <a class="text-decoration-none" href="#">View all 7 orders</a>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row bg-light mt-3 mb-3 rounded-3"
+                                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                                    <div class="container mt-2 mb-2">
+                                        <h1 class="fw-bold" style="font-size: 13px;">Addresses</h1>
+                                        <div class="row">
+                                            <hr class="text-secondary mt-2">
+                                            <h1 class="fw-bold" style="font-size: 13px;">Viet Nam</h1>
+                                            <h1 style="font-size: 13px;">253 Phan Văn Trị, Gò Vấp, Thành phố Hồ
+                                                Chí Minh</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-4 d-flex justify-content-center">
+                        <button type="button" class="btn w-25 btn-light m-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn w-25 fw-bold m-2 text-white"
+                            style="background-color: #FF313A;">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    	
+    </main>
+    <!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<!-- Router -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		app = 
+		angular
+		.module("spaApp", ["ngRoute"])
+		.config(function($routeProvider){
+			$routeProvider
+			.otherwise({
+				templateUrl: "/dashboard/home",
+				controller:"dashboard-ctrl"
+			})
+			.when("/product", {
+				templateUrl: "/dashboard/product",
+				controller: "product-ctrl"
+			})
+			.when("/category", {
+				templateUrl: "/dashboard/category",
+				controller: "category-ctrl"
+			})
+			.when("/order", {
+				templateUrl: "/dashboard/order"
+			})
+			.when("/customer", {
+				templateUrl: "/dashboard/customer"
+			})
+			.when("/analytic", {
+				templateUrl: "/dashboard/analytic"
+			})
+		})
+	</script>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+    <script src="/js/product-ctrl.js"></script>
+</body>
+
+</html>

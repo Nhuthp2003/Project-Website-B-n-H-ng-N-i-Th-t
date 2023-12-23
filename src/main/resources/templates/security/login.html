@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+<body>
+    <main>
+        <div class="container" style="font-family: 'Montserrat', sans-serif;">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 col-lg-6">
+                    <h1 class="text-center mt-5" style="font-size: 40px;">MY ACCOUNT</h1>
+                    <div class="row d-flex justify-content-center mt-4 mb-5">
+                        <form th:action="@{/login}" method="post" class="w-75">
+                            <a th:href="@{/account/register}" class="btn btn-outline-dark w-100 rounded-0" href="#" role="button">
+                                <h1 class="fw-bold mt-2" style="font-size: 11px;">CREATE ACCOUNT</h1>
+                            </a>
+                            <hr class="mt-4 text-secondary">
+                            <div class="mb-3 mt-4">
+                                <h1 class="text-center" th:text="${message}" style="font-size: 16px; color: #ff0101;"></h1>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="username" class="form-control rounded-0 shadow-none" id="email"
+                                    placeholder="Email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control rounded-0 shadow-none" id="password"
+                                    placeholder="Password">
+                            </div>
+                            <div class="mb-3">
+                                <a th:href="@{/account/reset}" class="text-dark" style="font-size: 13px;" href="#">Forgot your password?
+                                </a>
+                            </div>
+                            <button class="btn mt-3 rounded-0 w-100" type="submit"
+                                style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+                                <h1 class="fw-bold mt-2 text-white" style="font-size: 11px;">SIGN IN</h1>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

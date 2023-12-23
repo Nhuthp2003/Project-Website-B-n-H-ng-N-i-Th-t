@@ -1,0 +1,153 @@
+.hvdd:hover .hvddmn {
+	display: block;
+	margin-top: 0;
+}
+
+.hvdrop {
+	position: relative;
+	z-index: 3;
+}
+
+.hvddmn {
+	z-index: 2;
+}
+
+.hvdbmn {
+	z-index: 2;
+}
+
+.hvdb:hover .hvdbmn {
+	display: block;
+	top: 18px;
+	left: -120px;
+}
+
+.hvdrop:before {
+	content: "";
+	position: absolute;
+	top: 45px;
+	width: 0;
+	height: 3px;
+	background: #1e372f;
+	transition: width 0.3s ease;
+}
+
+.hvdd:hover .hvdrop:before {
+	width: 87%;
+}
+
+.linksp a {
+	color: #fff;
+}
+
+.linksp a:focus {
+	color: #fff;
+}
+
+.linksp a:hover {
+	background: #fff;
+	color: #000;
+	transition: 1.0s;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px
+		15px 12px;
+}
+
+.carousel-item .overlay-container {
+	position: relative;
+}
+
+.carousel-item .overlay-container::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.2);
+	pointer-events: none;
+}
+
+.imghover {
+	overflow: hidden;
+	position: relative;
+}
+
+.imghover img {
+	transition: transform 1.0s ease;
+}
+
+.imghover:hover img {
+	transform: scale(1.2);
+}
+
+.middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.hoverimg:hover .middle {
+	opacity: 1;
+}
+
+.fixedfooter {
+	position: relative;
+	overflow: hidden;
+	background: url('https://props.studiolumio.com/footer.webp') no-repeat
+		fixed center;
+	background-size: cover;
+}
+
+.hover-image .hover-image {
+	display: none;
+}
+
+.hover-image:hover .hover-image {
+	display: block;
+}
+
+.hover-image:hover .static-image {
+	display: none;
+}
+
+.custom-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background-image:
+		url('https://images.pexels.com/photos/707581/pexels-photo-707581.jpeg');
+	background-size: cover;
+	background-position: center;
+}
+
+.hvafc a:is(:hover, :focus) {
+	background-color: #1e372f;
+	color: #fff;
+}
+
+.hvafc a:focus {
+	background-color: #1e372f;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px
+		15px 12px;
+}
+
+.fcmn:focus {
+	background-color: #edece8;
+}
+
+.nav-pills .nav-link.active {
+	background-color: #edece8;
+	color: #000;
+}
+
+.nav-pills .nav-link:not(.active) {
+	color: #000;
+}

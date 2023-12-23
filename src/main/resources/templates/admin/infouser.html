@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Information</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" type="image/x-icon" href="../image/home/icon.webp">
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="row ms-2 me-2">
+        <div class="col-md-12 col-lg-4">
+            <div class="container">
+                <div class="row bg-light mt-3 mb-3 rounded-3"
+                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                    <div class="text-center">
+                        <img th:src="@{|/image/home/${user.images}|}"
+                            class="img-fluid rounded-circle mt-4" style="width: 96px; height: 96px;" alt="...">
+                        <h1 class="fw-bold mt-4" style="font-size: 16px;">
+                        	<span th:text="${user.lastName}"></span> <span th:text="${user.firstName}"></span>
+                        </h1>
+                        <a th:text="${user.email}" class="text-decoration-none" href="#" style="font-size: 13px;"></a>
+                        <h1 class="text-secondary mt-2 mb-2" style="font-size: 13px;">+84 <span th:text="${user.phone}" class="text-dark"></span></h1>
+                    </div>
+                    <div class="container mb-2">
+                        <hr class="text-secondary">
+                        <h1 class="fw-bold" style="font-size: 13px;">Last Order</h1>
+                        <h1 style="font-size: 13px;">7 days ago - <a class="text-decoration-none" href="#">#80294</a>
+                        </h1>
+                        <h1 class="fw-bold" style="font-size: 13px;">Average Order Value</h1>
+                        <h1 style="font-size: 13px;">$574.00</h1>
+                        <h1 class="fw-bold" style="font-size: 13px;">Registered</h1>
+                        <h1 style="font-size: 13px;">2 months ago</h1>
+                        <h1 class="fw-bold" style="font-size: 13px;">Email Marketing</h1>
+                        <h1 style="font-size: 13px;">Subscribed</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="container">
+                <div class="row bg-light mt-3 mb-3 rounded-3"
+                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                    <div class="container mt-2">
+                        <div class="row">
+                            <div class="col-2">
+                                <h1 class="fw-bold" style="font-size: 13px;">Orders</h1>
+                            </div>
+                            <div class="col">
+                                <h1 class="text-end" style="font-size: 13px;">Total spent $34,980.34
+                                    on 7 orders</h1>
+                            </div>
+                            <table class="table table-borderless" style="font-size: 13px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Items</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a class="text-decoration-none" href="#">#80294</a>
+                                        </td>
+                                        <td>Today at 6:10 pm</td>
+                                        <td>Pending</td>
+                                        <td>4 items</td>
+                                        <td>$320.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h1 class="text-center" style="font-size: 13px;">
+                                <a class="text-decoration-none" href="#">View all 7 orders</a>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col me-2">
+                		<div class="row bg-light mt-3 mb-3 rounded-3"
+		                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+		                    <div class="container mt-2">
+		                        <div class="row">
+		                            <h1 class="fw-bold" style="font-size: 13px;">Wishlist</h1>
+		                            <table class="table table-borderless" style="font-size: 13px;">
+		                                <thead>
+		                                    <tr>
+		                                        <th scope="col" class="col-6">Products</th>
+		                                        <th scope="col">Price</th>
+		                                        <th scope="col">Stock Status</th>
+		                                    </tr>
+		                                </thead>
+		                                <tbody>
+		                                    <tr>
+		                                        <td>#02020</td>
+		                                        <td>Today at 6:10 pm</td>
+		                                        <td>Pending</td>
+		                                    </tr>
+		                                </tbody>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+                	</div>
+                	<div class="col ms-2">
+                		<div class="row bg-light mt-3 mb-3 rounded-3"
+		                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+		                    <div class="container mt-2">
+		                        <div class="row">
+		                            <h1 class="fw-bold" style="font-size: 13px;">Discount</h1>
+		                            <table class="table table-borderless" style="font-size: 13px;">
+		                                <thead>
+		                                    <tr>
+		                                        <th scope="col">Name</th>
+		                                        <th scope="col">Code</th>
+		                                        <th scope="col">Status</th>
+		                                        <th scope="col">Product</th>
+		                                        <th scope="col">Amount</th>
+		                                    </tr>
+		                                </thead>
+		                                <tbody>
+		                                    <tr>
+		                                        <td>#02020</td>
+		                                        <td>Today at 6:10 pm</td>
+		                                        <td>Pending</td>
+		                                        <td>Pending</td>
+		                                        <td>Pending</td>
+		                                    </tr>
+		                                </tbody>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+                	</div>
+                </div>
+                <div class="row bg-light mt-4 mb-3 rounded-3"
+                    style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+                    <div class="container mt-2 mb-2">
+                        <h1 class="fw-bold" style="font-size: 13px;">Addresses</h1>
+                        <div class="row">
+                            <hr class="text-secondary mt-2">
+                            <h1 class="fw-bold" style="font-size: 13px;">Viet Nam</h1>
+                            <h1 th:text="${user.address}" style="font-size: 13px;"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

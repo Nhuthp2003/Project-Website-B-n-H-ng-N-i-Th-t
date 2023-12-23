@@ -1,0 +1,189 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main>
+		<div class="container-lg mb-5" style="font-family: 'Montserrat', sans-serif;">
+			<div class="row">
+				<div class="col-md-6 col-lg-7">
+					<a th:href="@{/}" class="text-decoration-none">
+						<h1 class="text-center mt-5"
+							style="font-size: 60px; font-family: 'Playfair Display', serif; color: #1e372f;">ARPHOR
+						</h1>
+					</a>
+					<div class="row">
+						<div class="col-4">
+							<h1 class="fw-bold mt-5" style="font-size: 18px;">Shipping address</h1>
+						</div>
+						<div class="col text-end">
+							<h1 class="mt-5" id="message" style="font-size: 16px; color: #ff0101;"></h1>
+						</div>
+					</div>
+					<input type="email" id="username" th:value="${#request.remoteUser}" placeholder="Email"
+						class="form-control rounded-0 shadow-none w-100 mt-4 border border-secondary bg-transparent"
+						disabled>
+					<div class="row mt-4">
+						<div class="col">
+							<input type="text" th:value="*{firstName}"
+								class="form-control rounded-0 shadow-none w-100 border border-secondary bg-transparent"
+								disabled>
+						</div>
+						<div class="col">
+							<input type="text" th:value="*{lastName}"
+								class="form-control rounded-0 shadow-none w-100 border border-secondary bg-transparent"
+								disabled>
+						</div>
+					</div>
+					<textarea ng-model="order.address" placeholder="Address"
+						class="form-control rounded-0 shadow-none w-100 mt-4 border border-secondary bg-transparent"
+						rows="4"></textarea>
+					<div class="row mt-4">
+						<div class="col">
+							<input type="text" ng-model="order.phone" placeholder="Phone"
+								class="form-control rounded-0 shadow-none w-100 border border-secondary bg-transparent">
+						</div>
+						<div class="col">
+							<select
+								class="form-control rounded-0 shadow-none w-100 border border-secondary bg-transparent"
+								id="paymentMethod" aria-label="Default select example">
+								<option value="">Payment</option>
+								<option value="1">Cash on Delivery</option>
+								<option value="2">VN Pay</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col mt-5">
+					<div class="row mt-3" ng-repeat="product in cart.products">
+						<div class="col-8">
+							<div class="row">
+								<div class="col-4">
+									<div class="position-relative">
+										<img ng-src="{{ product.image.split(',')[0] }}"
+											class="img-fluid position-relative" alt="...">
+										<span
+											class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+											style="background-color: #1e372f">
+											{{ product.qty }}
+											<span class="visually-hidden">unread messages</span>
+										</span>
+									</div>
+								</div>
+								<div class="col">
+									<div class="card-body mt-3">
+										<h1 class="card-title fw-bold" style="font-size: 13px;">
+											{{product.productName}}
+										</h1>
+										<h1 class="card-text mt-2" style="font-size: 12px;">
+											{{product.category.categoryName}}
+										</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<h1 class="card-title fw-bold mt-4 text-end" style="font-size: 16px;">
+								${{product.qty*product.price | number : 2}}</h1>
+						</div>
+					</div>
+					<hr class="text-secondary mt-4">
+					<div class="row">
+                        <div class="col-9">
+                            <input type="email" class="form-control rounded-0 shadow-none mt-2 border border-secondary"
+                                placeholder="Discount Code or Archarge Reward Code">
+                        </div>
+                        <div class="col">
+                            <button class="btn rounded-0 text-light mt-2 w-100"
+                                style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;"
+                                href="#" role="button">
+                                <h1 class="fw-bold mt-1 mb-1" style="font-size: 13px;">Apply</h1>
+                            </button>
+                        </div>
+                        <h1 class="mt-3" style="font-size: 16px; color: #ff0101;">Enter a valid discount code</h1>
+                    </div>
+                    <hr class="text-secondary mt-4">
+					<div class="row mt-4">
+                        <div class="col">
+                            <h1 class="fw-bold mt-2" style="font-size: 13px;">Subtotal</h1>
+                        </div>
+                        <div class="col">
+                            <div class="text-end">
+                                <span class="fw-bold" style="font-size: 13px;">${{cart.amount | number : 2}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-8">
+                            <h1 style="font-size: 13px;">Discount</h1>
+                        </div>
+                        <div class="col">
+                            <h1 class="text-end" style="font-size: 13px;">(20%) - $16</h1>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-8">
+                            <h1 style="font-size: 13px;">Shipping</h1>
+                        </div>
+                        <div class="col">
+                            <h1 class="text-end" style="font-size: 13px;">$17</h1>
+                        </div>
+                    </div>
+					<hr class="text-secondary mt-4">
+					<div class="row mt-5">
+						<div class="col">
+							<h1 class="fw-bold mt-2" style="font-size: 13px;">Total</h1>
+						</div>
+						<div class="col">
+							<div class="text-end">
+								<span class="me-2" style="font-size: 12px;">USD</span>
+								<span class="fw-bold" style="font-size: 24px;">${{cart.amount | number : 2}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr class="text-secondary mt-5">
+				<div class="row mt-3">
+					<div class="col">
+						<a th:href="@{/cart/view}" class="btn border-0" role="button"><iconify-icon
+								icon="ph:caret-left-thin"
+								style="font-size: 16px; position: relative; top: 2px;"></iconify-icon>Return to
+							cart</a>
+					</div>
+					<div class="col d-flex justify-content-end">
+						<form th:action="submitOrder" method="post" th:object="${order}">
+							<input type="hidden" name="totalPrice" ng-value="cart.amountPrice">
+							<button id="vnPayButton" ng-click="order.purchase()" class="btn btn-lg rounded-0 text-light"
+								style="background-color: #1e372f; display: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+								<h1 class="mt-2 fw-bold" style="font-size: 13px;">Continue to payment</h1>
+							</button>
+						</form>
+						<button ng-click="order.purchase()" id="cashButton" class="btn btn-lg rounded-0 text-light"
+							style="background-color: #1e372f; display: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+							<h1 class="mt-2 fw-bold" style="font-size: 13px;">Continue to payment</h1>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			const paymentMethodSelect = document.getElementById('paymentMethod');
+			const cashButton = document.getElementById('cashButton');
+			const vnPayButton = document.getElementById('vnPayButton');
+
+			paymentMethodSelect.onchange = function () {
+				if (paymentMethodSelect.value === '1') {
+					cashButton.style.display = 'inline-block';
+					vnPayButton.style.display = 'none';
+				} else if (paymentMethodSelect.value === '2') {
+					cashButton.style.display = 'none';
+					vnPayButton.style.display = 'inline-block';
+				} else {
+					cashButton.style.display = 'none';
+					vnPayButton.style.display = 'none';
+				}
+			};
+		</script>
+	</main>
+</body>
+
+</html>

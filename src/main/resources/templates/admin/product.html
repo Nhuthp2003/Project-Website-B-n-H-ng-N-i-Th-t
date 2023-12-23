@@ -1,0 +1,304 @@
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-10">
+			<h1 class="fw-bold" style="font-size: 32px;">Products</h1>
+		</div>
+		<div class="col-2 text-end dropdown">
+			<a class="btn border-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<iconify-icon icon="prime:bell" style="font-size: 24px;"></iconify-icon>
+				<span class="position-absolute top-0 translate-middle badge rounded-pill"
+					style="background-color: #1e372f;">
+					4
+					<span class="visually-hidden">unread messages</span>
+				</span>
+			</a>
+
+			<ul class="dropdown-menu border-0 dropdown-menu-end"
+				style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; font-size: 13px;">
+				<li>
+					<a class="dropdown-item" href="#">
+						<img src="https://weblearnbd.net/tphtml/ebazer/assets/img/product/prodcut-1.jpg"
+							class="img-fluid rounded-3" alt="..." style="width: 40px; height: 40px;">
+						<span class="fw-bold ms-1" style="font-size: 13px;">
+							New Order
+						</span>
+					</a>
+				</li>
+				<div class="text-center">
+					<a class="btn" href="#" role="button" style="font-size: 13px;">VIEW
+						ALL</a>
+				</div>
+			</ul>
+		</div>
+	</div>
+</div>
+<h1 class="mt-2 mb-4" style="font-size: 13px;">
+	<nav class="ms-2" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a class="text-secondary" href="#">Dashboard</a></li>
+			<li class="breadcrumb-item active text-dark" aria-current="page">Products</li>
+		</ol>
+	</nav>
+</h1>
+<div class="col">
+	<div class="row mt-3">
+		<div class="col-md-6 col-lg-6">
+			<div class="row">
+				<div class="input-group mb-3">
+					<input ng-model="searchText.productName" type="text"
+						class="form-control border-0 bg-light rounded-pill rounded-end shadow-none ms-1"
+						placeholder="Search here..." aria-label="Search here..." aria-describedby="button-addon2">
+					<button class="btn bg-light border-0 rounded-pill rounded-start me-1" type="button"
+						id="button-addon2">
+						<iconify-icon class="mt-2" icon="prime:search" style="font-size: 24px;"></iconify-icon>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="row rounded-3 ms-1 me-1 d-flex justify-content-end">
+				<a class="btn col-2 rounded-3 text-white me-1" href="/export-excel-product"
+					download="product_data.xlsx"
+					style="box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+					<iconify-icon icon="prime:print"
+						style="font-size: 17px; position: relative; top: 5px; color: #000;"></iconify-icon>
+				</a>
+				<a class="btn col-md-6 col-lg-5 rounded-3 text-white" href="#addproduct" data-bs-toggle="collapse"
+					role="button" aria-expanded="false" aria-controls="addproduct"
+					style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+					<iconify-icon icon="prime:plus"
+						style="font-size: 17px; position: relative; top: 3px;"></iconify-icon>
+					<h1 class="fw-bold mt-2" style="font-size: 13px; display: inline-block; margin-left: 5px;">
+						Add Product</h1>
+				</a>
+
+			</div>
+		</div>
+	</div>
+	<div class="collapse mt-3" id="addproduct">
+		<div class="card card-body border-0 rounded-4" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+			<div class="container">
+				<div class="row flex-column-reverse flex-md-row" id="product-form">
+					<div class="col-md-8 col-lg-8">
+						<h1 class="fw-bold mt-2" style="font-size: 13px;">Basic Information
+						</h1>
+						<form class="mt-3">
+							<input type="text" class="form-control shadow-none mb-3" placeholder="Product Name"
+								ng-model="form.productName">
+							<div class="my-error-container">
+								<div ng-show="formErrors">
+									<div ng-repeat="(errorKey, errorMessage) in formErrors">
+										<span class="text-danger" ng-bind="errorMessage"></span>
+									</div>
+								</div>
+							</div>
+						</form>
+						<select ng-model="form.category.categoryID" class="form-select mb-3 shadow-none"
+							aria-label="Default select example">
+							<option ng-repeat="c in cates" ng-value="c.categoryID">
+								{{c.categoryName}}</option>
+						</select>
+						<textarea ng-model="form.description" class="form-control shadow-none mb-3"
+							placeholder="Description" style="height: 151px;"></textarea>
+						<h1 class="fw-bold mb-3" style="font-size: 13px;">Stock & Pricing
+						</h1>
+						<div class="row">
+							<div class="col">
+								<input type="text" class="form-control shadow-none mb-3" placeholder="Stock"
+									ng-model="form.stock">
+							</div>
+							<div class="col">
+								<input type="text" class="form-control shadow-none mb-3" placeholder="Price"
+									ng-model="form.price">
+							</div>
+						</div>
+						<h1 class="fw-bold mb-3" style="font-size: 13px;">SKU</h1>
+						<input type="text" class="form-control shadow-none mb-3" placeholder="SKU">
+					</div>
+					<div class="col mb-3">
+						<h1 class="fw-bold mt-2" style="font-size: 13px;">Product Image</h1>
+						<div class="row">
+							<div class="col">
+								<div class="d-flex justify-content-center align-items-center rounded-4 mt-3 mb-3 text-secondary"
+									style="border: 2px dashed;" id="uploadSquare">
+									<input type="file" id="0"
+										onchange="angular.element(this).scope().imageChanged(this.files, 0)"
+										style="display: none;"> <label for="0"> <img id="preview-image"
+											ng-src="/image/product/{{form.image.split(',')[0] || 'n1.png'}}"
+											class="img-fluid mt-2 mb-2" alt="...">
+									</label>
+								</div>
+							</div>
+							<div class="col">
+								<div class="d-flex justify-content-center align-items-center rounded-4 mt-3 mb-3 text-secondary"
+									style="border: 2px dashed;" id="uploadSquare">
+									<input type="file" id="1"
+										onchange="angular.element(this).scope().imageChanged(this.files, 1)"
+										style="display: none;">
+									<label for="1"> <img id="preview-image"
+											ng-src="/image/product/{{form.image.split(',')[1] || 'n2.png'}}"
+											class="img-fluid mt-2 mb-2" alt="...">
+									</label>
+								</div>
+							</div>
+							<div class="col">
+								<div class="d-flex justify-content-center align-items-center rounded-4 mt-3 mb-3 text-secondary"
+									style="border: 2px dashed;" id="uploadSquare">
+									<input type="file" id="2"
+										onchange="angular.element(this).scope().imageChanged(this.files, 2)"
+										style="display: none;"> <label for="2"> <img id="preview-image"
+											ng-src="/image/product/{{form.image.split(',')[2] || 'n3.png'}}"
+											class="img-fluid mt-2 mb-2" alt="...">
+									</label>
+								</div>
+							</div>
+						</div>
+						<h1 class="fw-bold" style="font-size: 13px;">Status</h1>
+						<div class="mb-3">
+							<div>
+								<div ng-repeat="c in status">
+									<input type="radio" ng-model="form.statusProduct.statusProductId"
+										ng-value="c.statusProductId" id="{{c.statusProductId}}">
+									<label for="{{c.statusProductId}}">{{c.statusName}}</label>
+								</div>
+							</div>
+						</div>
+						<h1 class="fw-bold" style="font-size: 13px;">Created Date</h1>
+						<input type="date" class="form-control shadow-none mt-3 mb-3" ng-model="form.createDate">
+						<h1 class="fw-bold" style="font-size: 13px;">Shipping Cost</h1>
+						<input type="text" class="form-control shadow-none mt-3 mb-3" placeholder="Cost">
+					</div>
+				</div>
+				<div class="container">
+					<div class="row flex-column-reverse flex-md-row d-flex justify-content-end mt-3">
+						<a class="btn btn-light col-md-2 col-lg-2 rounded-3 m-1" href="#" role="button"
+							data-bs-toggle="collapse" data-bs-target="#addproduct" aria-expanded="false"
+							aria-controls="addproduct">
+							<h1 class="mt-2" style="font-size: 13px;">Cancel
+							</h1>
+						</a>
+						<a ng-click="create()" class="btn col-md-3 col-lg-3 rounded-3 text-white m-1" role="button"
+							style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+							<h1 class="fw-bold mt-2" style="font-size: 13px;">Add Product
+							</h1>
+						</a>
+						<a ng-click="update(form)" class="btn col-md-3 col-lg-3 rounded-3 text-white m-1" role="button"
+							style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+							<h1 class="fw-bold mt-2" style="font-size: 13px;">Update Product
+							</h1>
+						</a>
+
+						<a ng-click="reset(form)" class="btn col-md-3 col-lg-3 rounded-3 text-white m-1" role="button"
+							style="background-color: #1e372f; box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+							<h1 class="fw-bold mt-2" style="font-size: 13px;">Reset Product
+							</h1>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-lg-3">
+					<div class="input-group mb-3">
+						<label class="input-group-text fw-bold border-0 bg-transparent" for="inputGroupSelect01"
+							style="font-size: 13px;">Status</label>
+						<select class="form-select border-0 shadow-none bg-transparent" id="inputGroupSelect01"
+							style="font-size: 13px;">
+							<option value="1">Active</option>
+							<option value="2">In Active</option>
+							<option value="3">Low Stock</option>
+							<option value="4">Out of Stock</option>
+							<option value="5">Scheduled</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col table-responsive">
+			<table class="table table-borderless">
+				<thead class="table-secondary" style="font-size: 13px;">
+					<tr>
+						<th scope="col"><input ng-click="toggleAll()" type="checkbox"
+								class="form-check-input shadow-none"></th>
+						<th scope="col">Product</th>
+						<th scope="col">Category</th>
+						<th scope="col">Stock</th>
+						<th scope="col">Price</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in pager.items | filter:searchText">
+						<th><input ng-model="item.checked" type="checkbox" class="form-check-input shadow-none mt-3">
+						</th>
+						<td>
+							<a class="dropdown-item mt-1">
+								<img ng-src="/image/product/{{item.image.split(',')[0]}}" class="img-fluid rounded-3"
+									alt="..." style="width: 40px; height: 40px;">
+								<span class="fw-bold ms-1" style="font-size: 13px;">
+									{{item.productName}}
+								</span>
+							</a>
+						</td>
+						<td>
+							<h1 class="mt-3" style="font-size: 13px;">{{item.category.categoryName}}</h1>
+						</td>
+						<td>
+							<h1 class="mt-3" style="font-size: 13px;">{{item.stock}}</h1>
+						</td>
+						<td>
+							<h1 class="mt-3" style="font-size: 13px;">{{item.price}}</h1>
+						</td>
+						<td>
+							<div class="dropdown">
+								<a class="btn rounded-circle d-flex align-items-center justify-content-center" href="#"
+									data-bs-toggle="dropdown" aria-expanded="false"
+									style="width: 36px; height: 36px; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; position: relative; top: 5px;">
+									<iconify-icon icon="prime:ellipsis-h" style="font-size: 21px;"></iconify-icon>
+								</a>
+								<ul class="dropdown-menu border-0 dropdown-menu-end"
+									style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+									<li><a class="dropdown-item" ng-click="edit(item)" data-bs-toggle="collapse"
+											data-bs-target="#addproduct" aria-expanded="false"
+											aria-controls="addproduct" style="font-size: 13px;"><iconify-icon
+												class="ms-1 me-2" icon="prime:file-edit"
+												style="font-size: 16px; position: relative; top: 3px;"></iconify-icon>Edit
+										</a>
+									</li>
+									<li><a class="dropdown-item" data-bs-toggle="modal"
+											ng-click="delete(item.productId)" data-bs-target="#deleteproduct"
+											style="font-size: 13px;">
+											<iconify-icon class="ms-1 me-2" icon="prime:trash"
+												style="font-size: 16px; position: relative; top: 3px;"></iconify-icon>Delete
+										</a></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-6 text-lg-start text-center">
+					<h1 class="mt-2 mb-3 ms-2" style="font-size: 13px;">Showing 10 Products
+						of {{productCount}}</h1>
+				</div>
+				<div class="col text-lg-end text-center hvafc">
+					<a class="btn border border-light mb-5" role="button" ng-click="pager.first()">
+						<iconify-icon icon="teenyicons:left-outline" style="font-size: 12px;"></iconify-icon>
+					</a>
+					<a class="btn border border-light mb-5" role="button" ng-click="pager.page = 0">1</a>
+					<a class="btn border border-light mb-5" role="button" ng-click="pager.page = 1">2</a>
+					<a class="btn border border-light mb-5" role="button" ng-click="pager.page = 2">3</a>
+					<a class="btn border border-light mb-5" role="button" ng-click="pager.next()">
+						<iconify-icon icon="teenyicons:right-outline" style="font-size: 12px;"></iconify-icon>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
